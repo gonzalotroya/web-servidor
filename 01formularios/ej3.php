@@ -6,16 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="estilo.css">
+
 </head>
 <body>
-    
-<h1>Respuesta al formulario</h1>
-
-<?php 
-    $nombre=$_POST["nombre"];
-    $edad =$_POST["edad"];
-    echo "<p>$nombre</p>";
-    echo "<p>$edad</p>";
-?>
+<form action="ej3respuesta.php" method="post">
+    <label>Nombre</label><br/>
+    <input type="text" name="nombre"><br/>
+    <label>Edad</label><br/>
+    <input type="text" name="edad"><br/>
+    <input type="submit" value="Enviar">
+</form>    
 </body>
 </html>
