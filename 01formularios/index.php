@@ -22,7 +22,12 @@
     <p> Formulario de potecias</p>
     <h2><a href="ej6.php">Ejercicio 6</a></h2>
     <p> Formulario de factoriales</p>
+    <h2><a href="ejprueba.php">Prueba</a></h2>
+    <p> Formulario verificación</p>
+    <h2><a href="ej7.php">EJ7</a></h2>
+    <p> Formulario checkbox</p>
     <br>
+    
     <p id="volver"><a href="index.php">Volver</a></p>
     
 </body>

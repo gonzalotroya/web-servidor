@@ -16,9 +16,14 @@
     $x =$_POST["Numero2"];   
     $resultado = 1;
 
-for ($i = $x; $i > 0; $i--) {
-    $resultado *= $b;
-}
+    if ($i<0) {
+        echo "el numero no puede ser negativo";
+    }else {
+        for ($i = $x; $i > 0; $i--) {
+            $resultado *= $b;
+        }
+    }
+
 echo "La potencia es {$b}^{$x} = {$resultado}";
     
     

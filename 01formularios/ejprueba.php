@@ -4,24 +4,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Respuesta ej6</title>
+    <title>Ej</title>
     <link rel="stylesheet" href="estilo.css">
+
 </head>
 <body>
-    
-<h1>Respuesta al formulario</h1>
-
-<?php 
-    $num=$_POST["numero"];
-    $factorial = 1;
-    
-    for ($x=$num; $x>=1; $x--)
-    {
-        $factorial = $factorial * $x;
-    }
-    
-    echo "El factorial de $num es $factorial";
-
+<form action="ejprueba.php" method="post">
+    <label>numero</label><br/>
+    <input type="text" name="numero"><br/>
+    <input type="submit" value="Enviar">
+</form>    
+<?php
+if($_SERVER["REQUEST_METHOD"]=="POST"){
+    echo $_POST["numero"];
+}
 ?>
 </body>
 </html>
