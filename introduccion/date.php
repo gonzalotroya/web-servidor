@@ -22,7 +22,7 @@ switch ($fecha) {
         echo "Hoy es miercoles  ". date("j \d\\e M \d\\e Y");
         break;
     case 'Thursday':
-        echo "Hoy es Jueves  ". date("j \d\\e M \d\\e Y");
+        echo "Hoy es Juevessss  ". date("j \d\\e M \d\\e Y");
         break;
     case 'Friday':
         echo "Hoy es viernes  ". date("j \d\\e M \d\\e Y");
@@ -45,7 +45,7 @@ switch ($fecha) {
     */
 
     $d = date("l");
-
+/*
     switch($d) {
         case "Monday": 
             $dia = "Lunes";
@@ -57,7 +57,14 @@ switch ($fecha) {
             $dia = "Jueves";
             break;
     }
-
+    */
+    $dia=match($d){
+        "Monday"=>"Lunes",
+        "Tuesday"=>"Martes",
+        "Wednesday"=>"Miercoles",
+        "Thursday"=>"Jueves",
+        default => "Otro dia"
+    };
     $ndia = date("j");
 
     $m = date("F");
