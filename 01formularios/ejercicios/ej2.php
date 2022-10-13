@@ -7,5 +7,6 @@
         echo "<li>$i</li>";
     }
 
-    
+    require 'footer.php'
+
 ?>

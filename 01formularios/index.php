@@ -10,25 +10,23 @@
 </head>
 <body>
     <h1>Ejercicios de clase formularios</h1>
-    <h2><a href="formularios.php">Ejercicio 1</a></h2>
+    <h2><a href="ejercicios/formularios.php">Ejercicio 1</a></h2>
     <p> Formulario de nombre edad</p>
-    <h2><a href="numeros.php">Ejercicio 2</a></h2>
+    <h2><a href="ejercicios/numeros.php">Ejercicio 2</a></h2>
     <p> Formulario de numeros</p>
-    <h2><a href="ej3.php">Ejercicio 3</a></h2>
+    <h2><a href="ejercicios/ej3.php">Ejercicio 3</a></h2>
     <p> Formulario de nombre edad con manejo de lowercamelcase</p>
-    <h2><a href="ej4.php">Ejercicio 4</a></h2>
+    <h2><a href="ejercicios/ej4.php">Ejercicio 4</a></h2>
     <p> Formulario de frases y su repeticion</p>
-    <h2><a href="ej5.php">Ejercicio 5</a></h2>
+    <h2><a href="ejercicios/ej5.php">Ejercicio 5</a></h2>
     <p> Formulario de potecias</p>
-    <h2><a href="ej6.php">Ejercicio 6</a></h2>
+    <h2><a href="ejercicios/ej6.php">Ejercicio 6</a></h2>
     <p> Formulario de factoriales</p>
-    <h2><a href="ejprueba.php">Prueba</a></h2>
+    <h2><a href="ejercicios/ejprueba.php">Prueba</a></h2>
     <p> Formulario verificación</p>
-    <h2><a href="ej7.php">EJ7</a></h2>
+    <h2><a href="ejercicios/ej7.php">EJ7</a></h2>
     <p> Formulario checkbox</p>
     <br>
-    
-    <p id="volver"><a href="index.php">Volver</a></p>
-    
+        
 </body>
 </html>

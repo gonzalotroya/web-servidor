@@ -27,6 +27,8 @@
 
 </form>
 <?php
+
+require 'footer.php';
 if($_SERVER["REQUEST_METHOD"]=="POST"){
     $nombre= $_POST["videojuego"];
     $consola= $_POST["consola"];

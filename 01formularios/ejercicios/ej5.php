@@ -16,5 +16,9 @@
     <input type="text" name="Numero2"><br/>
     <input type="submit" value="Enviar">
 </form>    
+<?php
+require 'footer.php'
+
+?>   
 </body>
 </html>

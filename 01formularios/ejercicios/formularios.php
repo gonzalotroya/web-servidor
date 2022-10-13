@@ -9,12 +9,16 @@
 
 </head>
 <body>
-<form action="ej3respuesta.php" method="post">
-    <label>Nombre</label><br/>
+<form action="ej1.php" method="post">
+    <label>nombre</label><br/>
     <input type="text" name="nombre"><br/>
-    <label>Edad</label><br/>
+    <label>edad</label><br/>
     <input type="text" name="edad"><br/>
     <input type="submit" value="Enviar">
 </form>    
+<?php
+require 'footer.php'
+?>
 </body>
 </html>
+
