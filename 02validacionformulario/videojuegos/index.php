@@ -16,6 +16,9 @@
         if (empty($temp_titulo)) {
             $err_titulo="El campo es obligario";
         }
+        if (empty($temp_precio)) {
+            $err_precio="El campo es obligario";
+        }
     }
 
     function depurar($dato)
@@ -27,11 +30,16 @@
     }
     ?>
     <form action="" method="post">
-       <p> Titulo: <input type="text" name="titulo"></p>
+       <p> Titulo: <input type="text" name="titulo">
        <span class="error">
         * <?php if(isset($err_titulo)) echo $err_titulo ?>
        </span>
-       <p> Precio: <input type="text" name="precio"></p>
+       </p>
+       <p> Precio: <input type="text" name="precio">
+       <span class="error">
+        * <?php if(isset($err_precio)) echo $err_precio ?>
+       </span>
+       </p>
        <p><input type="submit" name="Crear"></p>
     </form>
     
