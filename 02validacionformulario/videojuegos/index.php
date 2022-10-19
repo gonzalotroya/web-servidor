@@ -8,7 +8,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h2>NUevo videojuego</h2>
+    <h2>Nuevo videojuego</h2>
     <?php
     if($_SERVER["REQUEST_METHOD"]=="POST"){
         $temp_titulo= depurar($_POST["titulo"]);
@@ -30,9 +30,9 @@
         if (empty($temp_consola)) {
             $err_consola="El campo es obligario";
         }else {
-           if(empty($temp_consola)){
+           
                 $consola=$temp_consola;
-           }
+           
             
         }
 
@@ -92,23 +92,24 @@
        </span>
        </p>
 
-       <p> Consola: <select name="consola">
-    <option disabled selected value> -- select an option -- </option>
+       <p> Consola: 
+    <select  name="consola">
+    <option  selected value> -- selecciona una opcion -- </option>
     <option value="ps4">ps4</option>
     <option value="xbox">xbox</option>
     <option value="pc">pc</option>
     <option value="Switch">Switch</option>
     </select>
-       <span class="error">
+    <span class="error">
         * <?php if(isset($err_consola)) echo $err_consola ?>
-       </span>
-       </p>
+    </span>
+    </p>
        
-       <p> Descripción: <input type="text" name="descripcion">
-       <span class="error">
-        * <?php if(isset($err_descr)) echo $err_descr ?>
-       </span>
-       </p>
+    <p> Descripción: <input type="text" name="descripcion">
+    <span class="error">
+    * <?php if(isset($err_descr)) echo $err_descr ?>
+    </span>
+    </p>
        
        
        <p><input type="submit" name="Crear"></p>
