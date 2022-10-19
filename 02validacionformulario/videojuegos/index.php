@@ -14,6 +14,8 @@
         $temp_titulo= depurar($_POST["titulo"]);
         $temp_precio =depurar($_POST["precio"]);
         $temp_consola=depurar($_POST["consola"]);
+        $temp_descripcion=depurar($_POST["descripcion"]);
+
 
         if (empty($temp_titulo)) {
             $err_titulo="El campo es obligario";
@@ -51,10 +53,21 @@
                 }
             }
         }
-        if(isset($titulo)&& isset($precio)&& isset($consola)){
+        if (empty($temp_descripcion)) {
+            $err_descripcion = "la descripcion es obligatoria";
+        }else{
+            if(strlen($temp_descripcion)>255){
+                $err_descripcion="no puede tener tantos caracteres";
+            }else{
+                $descripcion = $temp_descripcion;
+            }
+        }
+
+        if(isset($titulo)&& isset($precio)&& isset($consola)&& isset($descripcion)){
             echo "<p>$titulo</p>";
             echo "<p>$precio</p>";
             echo "<p>$consola</p>";
+            echo "<p>$descripcion</p>";
 
         }
     }
@@ -90,7 +103,17 @@
         * <?php if(isset($err_consola)) echo $err_consola ?>
        </span>
        </p>
+       
+       <p> Descripción: <input type="text" name="descripcion">
+       <span class="error">
+        * <?php if(isset($err_descr)) echo $err_descr ?>
+       </span>
+       </p>
+       
+       
        <p><input type="submit" name="Crear"></p>
+    
+    
     </form>
     
 </body>
