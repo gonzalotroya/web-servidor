@@ -106,7 +106,7 @@
     </span>
     </p>
        
-    <p> Descripción: <input type="text" name="descripcion">
+    <p> Descripción: <textarea name="descripcion"></textarea>
     <span class="error">
     * <?php if(isset($err_descr)) echo $err_descr ?>
     </span>
