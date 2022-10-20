@@ -13,7 +13,11 @@
     if($_SERVER["REQUEST_METHOD"]=="POST"){
         $temp_titulo= depurar($_POST["titulo"]);
         $temp_precio =depurar($_POST["precio"]);
-        $temp_consola=depurar($_POST["consola"]);
+        if(isset($_POST["consola"])){
+            $temp_consola=depurar($_POST["consola"]);
+        }else {
+            $temp_consola="";
+        }
         $temp_descripcion=depurar($_POST["descripcion"]);
 
 
@@ -30,10 +34,7 @@
         if (empty($temp_consola)) {
             $err_consola="El campo es obligario";
         }else {
-           
-                $consola=$temp_consola;
-           
-            
+            $consola=$temp_consola;
         }
 
         if (empty($temp_precio)) {
@@ -94,7 +95,7 @@
 
        <p> Consola: 
     <select  name="consola">
-    <option  selected value> -- selecciona una opcion -- </option>
+    <option value="" selected disabled hidden> -- selecciona una opcion -- </option>
     <option value="ps4">ps4</option>
     <option value="xbox">xbox</option>
     <option value="pc">pc</option>
