@@ -18,7 +18,7 @@
 
             $pattern ="/^[a-zA-Z áéíóúÁÉÍÓÚñÑ]+$/";
             $patternDNI ="/^[0-9]{8}[A-Z]+$/";
-            $patternFecha="/^[0-9]{1,2}([0-9][0-9]){1,2}+$/";
+            $patternFecha="/^[0-3][0-9]\/[0-1][0-9]\/(19|20)[0-9]{2}$/";
 
 
 
@@ -84,7 +84,7 @@
             if(preg_match($patternFecha,$temp_fecha)){
                 echo "<p>$temp_fecha sigue el patron</p>";
 
-                $temp_fecha=$fecha;
+                $fecha=$temp_fecha;
             }else{
                 echo "<p>$temp_fecha no sigue el patron</p>";
             }
