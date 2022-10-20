@@ -14,7 +14,9 @@
             $temp_apellidos= depurar($_POST["apellidos"]);
             $temp_DNI=depurar($_POST["DNI"]);
 
-            $pattern ="/^[a-zA-Z0-9 áéíóúÁÉÍÓÚñÑ]+$/";
+            $pattern ="/^[a-zA-Z áéíóúÁÉÍÓÚñÑ]+$/";
+            $patternDNI ="/^[0-9]{8}[A-Z]+$/";
+
 
             if (empty($temp_nombre)) {
                 $err_nombre = "El nombre es obligatorio";
@@ -54,7 +56,7 @@
             if(strlen($temp_DNI)<=8 && strlen($temp_DNI)>=10){
                 $err_DNI="no puede tener tantos caracteres";
             }else{
-                if(preg_match($pattern,$temp_DNI)){
+                if(preg_match($patternDNI,$temp_DNI)){
                     echo "<p>$temp_DNI sigue el patron</p>";
 
                     $DNI=$temp_DNI;
