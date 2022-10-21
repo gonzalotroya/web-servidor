@@ -25,7 +25,7 @@
             require 'funciones.php';
                $a = $_POST['numero'];
                $b = $_POST['numero2'];
-               $contador = $b + 1;
+               $contador = $b;
             do {
             if (esPrimo($contador)) {
             echo "$contador <tr>";
