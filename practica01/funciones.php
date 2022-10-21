@@ -12,4 +12,10 @@ function esPrimo($numero)
     }
     return true;
 }
+function depurar($dato) {
+    $dato = trim($dato);
+    $dato = stripslashes($dato);
+    $dato = htmlspecialchars($dato);
+    return $dato;
+}
 ?>

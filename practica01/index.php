@@ -52,20 +52,48 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($_POST["f"] == "ej2") {
-        $DNI=$_POST["DNI"];
-        echo "<p>$DNI</p>";
-                    $cadena=$DNI;
-                    echo "[".substr( $cadena, 9  )."]<br />";
-        $letras = match($letras) {
-            "A" => "a",
-            "B" => "b",
-            "C" => "c",
-            "D" => "d",
-        };        
-    
+        require 'funciones.php';
+        $temp_DNI=depurar($_POST["DNI"]);
+        $letra = match($temp_DNI%23){
+            0 => "T",
+            1 => "R",
+            2 => "W",
+            3 => "A",
+            4 => "G",
+            5 => "M",
+            6 => "Y",
+            7 => "F",
+            8 => "P",
+            9 => "D",
+            10 => "X",
+            11 => "B",
+            12 => "N",
+            13 => "J",
+            14 => "Z",
+            15 => "S",
+            16 => "Q",
+            17 => "V",
+            18 => "H",
+            19 => "L",
+            20 => "C",
+            21 => "K",
+            22 => "E",             
+        };
+        if (empty($temp_DNI)){
+            $err_DNI="el DNI es obligatiorio";
+        }else{
+            if(strlen($temp_DNI)<=8 && strlen($temp_DNI)>=10){
+                $err_DNI="no puede tener tantos caracteres";
+            }else if($letra==true){
+                    echo "<p>La letra $letra es correcta en el DNI $temp_DNI </p>";
+                    //$DNI=$temp_DNI;
+            }else {
+                echo "<p>La letra $letra no es correcta en el DNI $temp_DNI </p>";
+            }    
+        }
+        
+    }
 }
-}
-
 ?>
 </form>   
 </div>
