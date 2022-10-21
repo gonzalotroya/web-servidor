@@ -54,7 +54,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($_POST["f"] == "ej2") {
         require 'funciones.php';
         $temp_DNI=depurar($_POST["DNI"]);
-        $letra = match($temp_DNI%23){
+        
+       //$numero=substr($temp_DNI,8);
+        //echo $numero;
+        $resultado=(int)$temp_DNI%23;
+        echo $resultado;
+        //$letra = match($temp_DNI%23){
+        $letra = match($resultado){
             0 => "T",
             1 => "R",
             2 => "W",
@@ -84,12 +90,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }else{
             if(strlen($temp_DNI)<=8 && strlen($temp_DNI)>=10){
                 $err_DNI="no puede tener tantos caracteres";
-            }else if($letra==true){
-                    echo "<p>La letra $letra es correcta en el DNI $temp_DNI </p>";
-                    //$DNI=$temp_DNI;
-            }else {
+            }else if($letra==false){
+            }elseif (substr($temp_DNI,-1)!==$letra) {
                 echo "<p>La letra $letra no es correcta en el DNI $temp_DNI </p>";
-            }    
+            }elseif($letra==true){
+            if (substr($temp_DNI,-1)==$letra) {
+                echo "<p>La letra $letra es correcta en el DNI $temp_DNI </p>";
+            }
+        }    
         }
         
     }
