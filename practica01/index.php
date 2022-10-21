@@ -92,10 +92,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $err_DNI="no puede tener tantos caracteres";
             }else if($letra==false){
             }elseif (substr($temp_DNI,-1)!==$letra) {
-                echo "<p>La letra $letra no es correcta en el DNI $temp_DNI </p>";
+                echo "<p>La letra correcta es $letra entonces el DNI $temp_DNI NO es correcto </p>";
             }elseif($letra==true){
             if (substr($temp_DNI,-1)==$letra) {
-                echo "<p>La letra $letra es correcta en el DNI $temp_DNI </p>";
+                echo "<p>La letra correcta es $letra entonces el DNI $temp_DNI SI es correcto </p>";
             }
         }    
         }
