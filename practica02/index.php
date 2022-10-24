@@ -12,6 +12,7 @@
     <?php
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $temp_DNI=depurar($_POST["DNI"]);
+        $temp_nombre= depurar($_POST["nombre"]);
         $temp_apellidos= depurar($_POST["apellidos"]);
         $temp_apellidos2=depurar($_POST["apellidos2"]);
         $temp_DNI=depurar($_POST["DNI"]);
@@ -90,7 +91,7 @@
                 $err_titulo="no puede tener tantos caracteres";
             }else{
                 if(preg_match($pattern,$temp_nombre)){
-                    echo "<p>$temp_nombre sigue el patron</p>";
+                    echo "<p>". mb_convert_case($temp_nombre,MB_CASE_TITLE,"UTF-8") ." sigue el patron</p>";
 
                     $nombre=$temp_nombre;
                 }else{
@@ -106,7 +107,7 @@
                 $err_titulo="no puede tener tantos caracteres";
             }else{
                 if(preg_match($pattern,$temp_apellidos)){
-                    echo "<p>$temp_apellidos sigue el patron</p>";
+                    echo "<p>". mb_convert_case($temp_apellidos,MB_CASE_TITLE,"UTF-8") ." sigue el patron</p>";
 
                     $apellidos=$temp_apellidos;
                 }else{
@@ -122,7 +123,7 @@
                 $err_titulo2="no puede tener tantos caracteres";
             }else{
                 if(preg_match($pattern,$temp_apellidos)){
-                    echo "<p>$temp_apellidos sigue el patron</p>";
+                    echo "<p>". mb_convert_case($temp_apellidos2,MB_CASE_TITLE,"UTF-8") ." sigue el patron</p>";
 
                     $apellidos2=$temp_apellidos2;
                 }else{
@@ -133,6 +134,12 @@
     
     if (empty($temp_email)){
         $err_email="el email es obligatiorio";
+    }else if(str_contains($temp_email,"nigga")){
+        echo "<p>$temp_email contiene palabras prohibidas introduce un email correcto</p>";
+    }else if(str_contains($temp_email,"negrata")){
+        echo "<p>$temp_email contiene palabras prohibidas introduce un email correcto</p>";
+    }else if(str_contains($temp_email,"nigger")){
+        echo "<p>$temp_email contiene palabras prohibidas introduce un email correcto</p>";
     }else if(filter_var($temp_email,FILTER_VALIDATE_EMAIL)==true){
         echo "<p>$temp_email correcto</p>";
     }else {
@@ -143,11 +150,15 @@
     if (empty($temp_fecha)){
         $err_fecha="la fecha es obligatioria";
     }else {
-        if(preg_match($patternFecha,$temp_fecha)){
+        if ($temp_fecha<18) {
+            echo "Es menor de edad,no puedes ser menor de edad";
+        }elseif ($temp_fecha>120 || $temp_fecha<0) {
+            echo "Lo siento no creo que sigas vivo";
+        }elseif(preg_match($patternFecha,$temp_fecha)){
             echo "<p>$temp_fecha sigue el patron</p>";
-
             $fecha=$temp_fecha;
-        }else{
+            }
+        else{
             echo "<p>$temp_fecha no sigue el patron</p>";
         }
     }
@@ -191,7 +202,7 @@
                 * <?php if(isset($err_email)) echo $err_email ?>
             </span>
         <br><br>
-        <label>Fecha</label>
+        <label>Edad</label>
         <input type="text" name="fecha">
         <span class="error">
                 * <?php if(isset($err_fecha)) echo $err_fecha?>
