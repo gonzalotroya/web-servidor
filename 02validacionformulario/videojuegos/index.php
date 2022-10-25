@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="estilo.css">
     <title>Document</title>
 </head>
 <body>
@@ -20,6 +20,45 @@
         }
         $temp_descripcion=depurar($_POST["descripcion"]);
 
+        $file_name=$_FILES["imagen"]["name"];
+        $file_temp_name=$_FILES["imagen"]["tmp_name"];
+        $file_size=$_FILES["imagen"]["size"];
+        $file_type=$_FILES["imagen"]["type"];
+
+       /* echo "<p>$file_name</p>";
+        echo "<p>$file_temp_name</p>";
+        echo "<p>$file_size</p>";
+        echo "<p>$file_type</p>";
+        */
+        //$path="./images/". $file_name;
+
+        $extension=pathinfo($file_name,PATHINFO_EXTENSION);
+        //echo "<p>La extension es $extension</p>";
+        if(empty($file_size)){
+            $err_img="El campo es obligario";
+        }elseif ($file_size>1000000) {
+            $err_img="El archivo es demasiado grande debe ser inferior a 1 mg";
+        }else{
+        if (($extension)=="jpg"&&"jpeg"&&"png") {
+            echo "<p>Archivo $extension valido</p>";
+        }
+        if(($extension)!=="jpg"&&"jpeg"&&"png"){
+            $err_img= "Archivo $extension invalido tiene que ser jpg, png o jpeg";
+        }else {
+        $new_file_name="videojuego_". $temp_titulo.".". $extension;
+        $path="./images/". $new_file_name;
+
+        if(move_uploaded_file($file_temp_name,$path)){
+            echo "<p>Fichero movido con exito</p>";
+        }else {
+            echo "<p>Fichero  no se pudo mover</p>";
+        }
+        }
+    }
+        
+        
+        
+        
 
         if (empty($temp_titulo)) {
             $err_titulo="El campo es obligario";
@@ -81,7 +120,7 @@
         return $dato;
     }
     ?>
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
        <p> Titulo: <input type="text" name="titulo">
        <span class="error">
         * <?php if(isset($err_titulo)) echo $err_titulo ?>
@@ -111,7 +150,11 @@
     * <?php if(isset($err_descr)) echo $err_descr ?>
     </span>
     </p>
-       
+    <p> Imagen: <input type="file" name="imagen">
+    <span class="error">
+    * <?php if(isset($err_img)) echo $err_img ?>
+    </span>
+    </p>
        
        <p><input type="submit" name="Crear"></p>
     
