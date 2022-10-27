@@ -30,7 +30,6 @@
                 $err_DNI="El DNI no tiene sufiecientes caracteres o sobran";
             }else{
                 if(preg_match($patternDNI,$temp_DNI)){
-                    echo "<p>$temp_DNI sigue el patron</p>";
                     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
                             $resultado=(int)$temp_DNI%23;
@@ -134,11 +133,11 @@
     if (empty($temp_email)){
         $err_email="el email es obligatiorio";
     }else if(str_contains($temp_email,"nigga")){
-        echo "<p>$temp_email contiene palabras prohibidas introduce un email correcto</p>";
+        $err_email= "<p>$temp_email contiene palabras prohibidas introduce un email correcto</p>";
     }else if(str_contains($temp_email,"negrata")){
-        echo "<p>$temp_email contiene palabras prohibidas introduce un email correcto</p>";
+        $err_email=  "<p>$temp_email contiene palabras prohibidas introduce un email correcto</p>";
     }else if(str_contains($temp_email,"nigger")){
-        echo "<p>$temp_email contiene palabras prohibidas introduce un email correcto</p>";
+        $err_email=  "<p>$temp_email contiene palabras prohibidas introduce un email correcto</p>";
     }else if(filter_var($temp_email,FILTER_VALIDATE_EMAIL)==true){
         echo "<p>$temp_email correcto</p>";
     }else {
@@ -152,7 +151,7 @@
         if ($temp_fecha<18) {
             echo "Es menor de edad,no puedes ser menor de edad";
         }elseif ($temp_fecha>120 || $temp_fecha<0) {
-            echo "Lo siento no creo que sigas vivo";
+            $err_fecha= "Lo siento no creo que sigas vivo";
         }elseif(preg_match($patternFecha,$temp_fecha)){
             echo "<p>$temp_fecha sigue el patron</p>";
             $fecha=$temp_fecha;
@@ -180,13 +179,13 @@
         <label>Primer apellido</label>
         <input type="text" name="apellidos">
         <span class="error">
-                * <?php if(isset($err_primerApellido)) echo $err_primerApellido ?>
+                * <?php if(isset($err_apellidos)) echo $err_apellidos ?>
             </span>
         <br><br>
         <label>Segundo apellido</label>
         <input type="text" name="apellidos2">
         <span class="error">
-                * <?php if(isset($err_segundoApellido)) echo $err_segundoApellido ?>
+                * <?php if(isset($err_apellidos2)) echo $err_apellidos2 ?>
             </span>
         <br><br>
         <label>DNI</label>
