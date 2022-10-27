@@ -147,6 +147,14 @@ echo "</table>";
         array("Marcianitos","Arcade" , 10) ,
         array("Bdo","pc" , 20) ,
         array("Killzone","ps2" , 30));
+
+    $nuevo_juego=["Fruit Ninja","movil",0];
+    array_push($juegos,$nuevo_juego);
+    unset($juegos[1]);
+
+    $titulo=array_column($juegos,0);
+    $consola=array_column($juegos,1);
+    array_multisort($titulo,SORT_ASC,$consola,SORT_DESC,$juegos);
     foreach ($juegos as $juego) {
         list($nombre,$consola,$precio)=$juego;
         echo "Nombre: $nombre <br>";
@@ -179,6 +187,164 @@ echo "</table>";
     }
  ?>
 </table>
-</div>  
+</div>
+<?php 
+$numeros=[];
+for($i = 2; $i <= 50 ; $i+=2) {
+    ?>
+    <?php $numeros[]=$i;?>
+    <?php
+}
+shuffle($numeros);
+rsort($numeros);
+?>
+<?php
+for($i = 0; $i < count($numeros) ; $i++) {
+    ?>
+    <ol><?php echo($numeros[$i]);?></ol>
+    <?php
+}
+?> 
+
+<?php
+    $numeros = [];
+
+    for($i = 1; $i <= 10; $i++) {
+        $numeros[] = rand(0,100);
+    }
+    ?>
+
+    <h2>Números ordenados de mayor a menor</h2>
+    <ul>
+        <?php
+        rsort($numeros);
+        for ($i = 0; $i < count($numeros); $i++) {
+            echo "<li>" . $numeros[$i] . "</li>";
+        }
+        ?>
+    </ul>
+
+    <h2>Números ordenados de menor a mayor</h2>
+    <ul>
+        <?php
+        sort($numeros);
+        for ($i = 0; $i < count($numeros); $i++) {
+            echo "<li>" . $numeros[$i] . "</li>";
+        }
+        ?>
+    </ul>
+<?php
+$paises = array( "Italy"=>"Rome", "Luxembourg"=>"Luxembourg", "Belgium"=> "Brussels", 
+"Denmark"=>"Copenhagen", "Finland"=>"Helsinki", "France" => "Paris", "Slovakia"=>"Bratislava", "Slovenia"=>"Ljubljana", 
+"Germany" => "Berlin", "Greece" => "Athens", "Ireland"=>"Dublin", "Netherlands"=>"Amsterdam", 
+"Portugal"=>"Lisbon", "Spain"=>"Madrid", "Sweden"=>"Stockholm", "United Kingdom"=>"London", 
+"Cyprus"=>"Nicosia", "Lithuania"=>"Vilnius", "Czech Republic"=>"Prague", "Estonia"=>"Tallin", 
+"Hungary"=>"Budapest", "Latvia"=>"Riga", "Malta"=>"Valetta", "Austria" => "Vienna", "Poland"=>"Warsaw");
+ksort($paises);
+    ?>
+    <table class="tabla" border="1px">
+        <tr>
+            <th>País</th>
+            <th>Capital</th>
+        </tr>
+        <?php
+        foreach ($paises as $pais => $capital) {
+        ?>
+            <tr>
+                <td><?php echo $pais ?></td>
+                <td><?php echo $capital ?></td>
+            </tr>
+        <?php
+        }
+        ?>
+    </table>
+
+
+
+
+<?php 
+$ser=array(
+    array("Dark","Netflix" , 3) ,
+    array("Edgerunner","Netflix" , 1) ,
+    array("Vigilante","Netflix" , 1),
+    array("Band of brothers","hbo",1),
+    array("Andor","Disney+",1)
+);
+?>
+
+    <table class="tabla" border="1px">
+        <tr>
+            <th>Titulo</th>
+            <th>Plataforma</th>
+            <th>Temporadas</th>
+
+        </tr>
+        <br>
+        <?php
+        $temporadas=array_column($ser,2);
+        array_multisort($temporadas,SORT_DESC,$ser);
+        foreach ($ser as $se) {
+            list($titulo,$plataforma,$temporadas)=$se;
+        ?>
+            <tr>
+                <td><?php echo $titulo?></td>
+                <td><?php echo $plataforma ?></td>
+                <td><?php echo $temporadas ?></td>
+            </tr>
+        <?php
+        }
+        ?>
+    </table>
+    <br>
+    <table class="tabla" border="1px">
+        <tr>
+            <th>Titulo</th>
+            <th>Plataforma</th>
+            <th>Temporadas</th>
+
+        </tr>
+        <?php
+        $titulo=array_column($ser,0);
+        array_multisort($titulo,SORT_ASC,$ser);
+        foreach ($ser as $se) {
+            list($titulo,$plataforma,$temporadas)=$se;
+        ?>
+            <tr>
+                <td><?php echo $titulo?></td>
+                <td><?php echo $plataforma ?></td>
+                <td><?php echo $temporadas ?></td>
+            </tr>
+        <?php
+        }
+        ?>
+    </table>
+    <br>
+    <table class="tabla" border="1px">
+        <tr>
+            <th>Titulo</th>
+            <th>Plataforma</th>
+            <th>Temporadas</th>
+
+        </tr>
+        <?php
+        $titulo=array_column($ser,0);
+        $plataforma=array_column($ser,1);
+        array_multisort($plataforma,SORT_ASC,$titulo,SORT_ASC,$ser);
+        foreach ($ser as $se) {
+            list($titulo,$plataforma,$temporadas)=$se;
+        ?>
+            <tr>
+                <td><?php echo $titulo?></td>
+                <td><?php echo $plataforma ?></td>
+                <td><?php echo $temporadas ?></td>
+            </tr>
+        <?php
+        }
+        ?>
+    </table>
+    <br>
+
+
+
 </body>
 </html>
