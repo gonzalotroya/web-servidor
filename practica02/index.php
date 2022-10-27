@@ -61,14 +61,13 @@
                             };          
                             if(strlen($temp_DNI)>=10 || strlen($temp_DNI)<=8){
         
-                                echo "faltan o sobran caracteres";
+                                $err_DNI= "faltan o sobran caracteres";
         
                             }else{            
                                 $letra_introducida =substr($temp_DNI,-1);       
 
                                 if($letra_introducida!==$letra){
-                                    echo "<p>La letra $letra_introducida es incorrecta en el DNI $temp_DNI </p>";
-                                    echo "<p>La letra $letra es la correcta</p>";
+                                    $err_DNI="<p>La letra $letra_introducida es incorrecta en el DNI $temp_DNI </p>"."<p>La letra $letra es la correcta</p>";
                                 }else if($letra_introducida==$letra){
                                 
                                     echo "<p>La letra $letra_introducida es correcta en el DNI $temp_DNI </p>";
@@ -79,7 +78,7 @@
                         
                     $DNI=$temp_DNI;
                 }else{
-                    echo "<p>$temp_DNI no sigue el patron</p>";
+                    $err_DNI="<p>$temp_DNI no sigue el patron</p>";
                 }
             }
         }
@@ -95,7 +94,7 @@
 
                     $nombre=$temp_nombre;
                 }else{
-                    echo "<p>$temp_nombre no sigue el patron</p>";
+                    $err_nombre="<p>$temp_nombre no sigue el patron</p>";
                 }
             }
             
@@ -111,7 +110,7 @@
 
                     $apellidos=$temp_apellidos;
                 }else{
-                    echo "<p>$temp_apellidos no sigue el patron</p>";
+                    $err_apellidos="<p>$temp_apellidos no sigue el patron</p>";
                 }
             }    
         }
@@ -127,7 +126,7 @@
 
                     $apellidos2=$temp_apellidos2;
                 }else{
-                    echo "<p>$temp_apellidos2 no sigue el patron</p>";
+                    $err_apellidos2= "<p>$temp_apellidos2 no sigue el patron</p>";
                 }
             }    
         }
@@ -143,7 +142,7 @@
     }else if(filter_var($temp_email,FILTER_VALIDATE_EMAIL)==true){
         echo "<p>$temp_email correcto</p>";
     }else {
-        echo "<p>$temp_email no es correcto</p>";
+        $err_email="<p>$temp_email no es correcto</p>";
     }
     
     
@@ -159,7 +158,7 @@
             $fecha=$temp_fecha;
             }
         else{
-            echo "<p>$temp_fecha no sigue el patron</p>";
+            $err_fecha="<p>$temp_fecha no sigue el patron</p>";
         }
     }
     
