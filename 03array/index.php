@@ -343,8 +343,54 @@ $ser=array(
         ?>
     </table>
     <br>
+<?php 
+ function calificacion (int $nota) {
+    if ($nota < 5) {
+        $calificacion = "Suspenso";
+    } else if ($nota >= 5 && $nota < 7) {
+        $calificacion = "Aprobado";
+    } else if ($nota >= 7 && $nota < 9) {
+        $calificacion = "Notable";
+    } else {
+        $calificacion = "Sobresaliente";
+    }
+    return $calificacion;
+}
+function calificacionMatch( int $nota){
+    $calificacion=match(true){
+        $nota <5 => "Suspenso",
+        $nota>=5 and $nota <7 => "Aprobado",
+        $nota>=7 and $nota <9 => "Notable",
+        default => "Sobresaliente",
 
+    };
+    return $calificacion;
+}
+{
+    # code...
+}
+$estudiantes=[["Luis",rand(0,10)],["Luisa",rand(0,10)],["Paco",rand(0,10)]];
+?>
+<table class="tabla" border="1px">
+        <tr>
+            <th>Nombre</th>
+            <th>Nota</th>
+            <th>Calificación</th>
+        </tr>
+        <?php
+        foreach ($estudiantes as $estudiante) {
+            list($nombre,$nota)=$estudiante;
+        ?>
+            <tr>
+                <td><?php echo $nombre?></td>
+                <td><?php echo $nota ?></td>
+                <td><?php echo calificacion($nota) ?>
 
+            </tr>
+        <?php
+        }
+        ?>
+    </table>
 
 </body>
 </html>
