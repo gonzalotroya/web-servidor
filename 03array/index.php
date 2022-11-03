@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="estilo.css">
-    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+    <title>Ej arrays</title>
 </head>
 <body>
+    <div class="container">
     <?php 
     $videojuegos=array(
         "juego1"=>"Cyberpunk 2077",
@@ -343,6 +346,10 @@ $ser=array(
         ?>
     </table>
     <br>
+<div class="row">
+    <div class="col-6">
+
+
 <?php 
  function calificacion (int $nota) {
     if ($nota < 5) {
@@ -356,41 +363,55 @@ $ser=array(
     }
     return $calificacion;
 }
-function calificacionMatch( int $nota){
+//$estudiantes=[["Luis",rand(0,10)],["Luisa",rand(0,10)],["Paco",rand(0,10)]];
+$estudiantes=[["Luis"],["Luisa"],["Paco"]];
+for ($i=0; $i < count($estudiantes); $i++) { 
+    $estudiantes[$i][1]=rand(0,10);
+    $estudiantes[$i][2]=rand(0,10);
+    $estudiantes[$i][3]=rand(0,10);
+}
+?>
+<?php 
+function calificacionMatch( int $media){
     $calificacion=match(true){
-        $nota <5 => "Suspenso",
-        $nota>=5 and $nota <7 => "Aprobado",
-        $nota>=7 and $nota <9 => "Notable",
+        $media <5 => "Suspenso",
+        $media >=5 and $media  <7 => "Aprobado",
+        $media >=7 and $media  <9 => "Notable",
         default => "Sobresaliente",
 
     };
     return $calificacion;
-}
-{
-    # code...
-}
-$estudiantes=[["Luis",rand(0,10)],["Luisa",rand(0,10)],["Paco",rand(0,10)]];
-?>
-<table class="tabla" border="1px">
+}?>
+<table class="table" border="1px">
         <tr>
             <th>Nombre</th>
-            <th>Nota</th>
+            <th>Nota 1</th>
+            <th>Nota 2</th>
+            <th>Nota 3</th>
             <th>Calificación</th>
         </tr>
         <?php
         foreach ($estudiantes as $estudiante) {
-            list($nombre,$nota)=$estudiante;
+            list($nombre,$nota1,$nota2,$nota3)=$estudiante;
+            $media=(int)($nota1+$nota2+$nota3)/3;
         ?>
+
             <tr>
                 <td><?php echo $nombre?></td>
-                <td><?php echo $nota ?></td>
-                <td><?php echo calificacion($nota) ?>
+                <td><?php echo $nota1 ?></td>
+                <td><?php echo $nota2 ?></td>
+                <td><?php echo $nota3 ?></td>
+                <td><?php echo calificacionMatch($media) ?>
 
             </tr>
         <?php
         }
         ?>
     </table>
-
+    </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </body>
 </html>
