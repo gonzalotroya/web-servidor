@@ -15,7 +15,7 @@
         array("mesa", 20) ,
         array("balon", 30));
 ?>
-<table  class="table table-dark" border="1px">
+<table  class="table table-dark">
         <tr>
             <th>Nombre</th>
             <th>Precio</th>
@@ -112,7 +112,7 @@
          <!--
             EJ3
         -->
-        <table  class="table table-dark" border="1px">
+        <table  class="table table-dark">
         <tr>
             <th>Numeros</th>
         </tr>
@@ -124,17 +124,50 @@
         foreach($numeros as $nu){
             if(($nu % 3)==0){
                 unset($numeros[$nu]);
-                echo " ".$nu." ";
+                ?><td><?php echo $nu;?></td><?php
             }
         }
         ?>
-         
         </table>
          <!--
             EJ4
         -->
-
-
+        <?php
+        $personas=array(
+        array("paco", "chocolatero",rand(0,100)) ,
+        array("pepe","tu tio pesao",rand(0,100)) ,
+        array("Adolfo","Hilde", rand(0,100))
+        );
+        ?>
+        <table  class="table table-dark">
+        <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Edad</th>
+            <th>Estado</th>
+        </tr>
+        <?php
+        foreach ($personas as $per) {
+            list($nombre,$apellido,$edad)=$per;
+        ?>
+            <tr>
+                <td><?php echo $nombre?></td>
+                <td><?php echo $apellido ?></td>
+                <td><?php echo $edad ?></td>
+                <td><?php  $estado=false; echo mayoria($edad) ?></td>
+            </tr>
+        <?php
+        }
+        function mayoria($edad){
+            $estado=match(true){
+                $edad >=65 => "jubilado",
+                $edad >=18 && $edad <=65 => "Mayor de edad",
+                $edad <18 => "Menor de edad",
+                
+            };
+            return $estado;
+        }
+        ?>
          <!--
             EJ5
         -->
