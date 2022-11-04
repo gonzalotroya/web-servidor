@@ -174,7 +174,7 @@
         $identificador=array(
         array("paco","12345678L") ,
         array("pepe","87654321D") ,
-        array("Adolfo","25608448N")
+        array("Adolfo","25608449L")
         );
         ?>
         <table  class="table table-dark">
@@ -231,8 +231,15 @@
                         $err_DNI="<p>$temp_DNI no sigue el patron</p>";
                     }
                 }
-                return $letra;
-
+                if(($letra == substr($temp_DNI,-1))==true){
+                    return "Si es valido".$letra;
+                }else{
+                if(($letra == substr($temp_DNI,-1))==false) {
+                    return "NO es valido $letra";
+                }else {
+                    return"esto";
+                }
+            }
             }
         ?>
 
