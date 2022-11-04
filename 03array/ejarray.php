@@ -163,7 +163,6 @@
                 $edad >=65 => "jubilado",
                 $edad >=18 && $edad <=65 => "Mayor de edad",
                 $edad <18 => "Menor de edad",
-                
             };
             return $estado;
         }
@@ -171,6 +170,73 @@
          <!--
             EJ5
         -->
+        <?php
+        $identificador=array(
+        array("paco","12345678L") ,
+        array("pepe","87654321D") ,
+        array("Adolfo","25608448N")
+        );
+        ?>
+        <table  class="table table-dark">
+        <tr>
+            <th>Nombre</th>
+            <th>DNI</th>
+            <th>Letra valida</th>
+        </tr>
+        <?php
+        foreach ($identificador as $DN) {
+            list($nombre,$temp_DNI)=$DN;
+        ?>
+            <tr>
+                <td><?php echo $nombre?></td>
+                <td><?php echo $temp_DNI ?></td>
+                <td><?php echo validador($temp_DNI) ?></td>
+            </tr>
+        <?php
+        }
+        function validador($temp_DNI){
+            $patternDNI ="/^[0-9]{8}[A-Z]+$/"; 
+                if(strlen($temp_DNI)>=10 && strlen($temp_DNI)<=8){
+                    $err_DNI="El DNI no tiene sufiecientes caracteres o sobran";
+                }else{
+                    if(preg_match($patternDNI,$temp_DNI)){            
+                                $resultado=(int)$temp_DNI%23;
+                                $letra = match($resultado){
+                                    0 => "T",
+                                    1 => "R",
+                                    2 => "W",
+                                    3 => "A",
+                                    4 => "G",
+                                    5 => "M",
+                                    6 => "Y",
+                                    7 => "F",
+                                    8 => "P",
+                                    9 => "D",
+                                    10 => "X",
+                                    11 => "B",
+                                    12 => "N",
+                                    13 => "J",
+                                    14 => "Z",
+                                    15 => "S",
+                                    16 => "Q",
+                                    17 => "V",
+                                    18 => "H",
+                                    19 => "L",
+                                    20 => "C",
+                                    21 => "K",
+                                    22 => "E",
+                                };          
+                                
+                    }else{
+                        $err_DNI="<p>$temp_DNI no sigue el patron</p>";
+                    }
+                }
+                return $letra;
+
+            }
+        ?>
+
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
 integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </body>
