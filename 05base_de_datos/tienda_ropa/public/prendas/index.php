@@ -11,41 +11,49 @@
 </head>
 <body>
    <div class="container">
-     <h1>Listado de prendas</h1>
-   </div>
-    <div class="row">
-        <div class="col-9">
-        <table class="table table-striped table-hover">
-            <thead class="table table-dark">
-                <tr>
-                    <th>Nombre</th>
-                    <th>Talla</th>
-                    <th>Precio</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php 
-                require '../../utils/database.php';
-                $sql ="SELECT * FROM prendas";
-                $resultado=$conexion ->query($sql);
+        <?php require '../header.php' ?>
+        <h1>Listado de prendas</h1>
+        <div class="row">
+            <div class="col-9">
+                <a class="btn btn-primary" href="insertar_prenda.php">Nueva Prenda</a>
+                <table class="table table-striped table-hover">
+                <thead class="table table-dark">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Talla</th>
+                        <th>Precio</th>
+                        <th>Categoria</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php 
+                    require '../../utils/database.php';
+                    $sql ="SELECT * FROM prendas";
+                    $resultado=$conexion ->query($sql);
 
-                if($resultado -> num_rows >0){
-                    while ($fila = $resultado -> fetch_assoc()) {
-                        $nombre=$fila["nombre"];
-                        $talla=$fila["talla"];
-                        $precio=$fila["precio"];
-                        ?>
-                        <tr>
-                            <td><?php echo $nombre ?></td>
-                            <td><?php echo $talla ?></td>
-                            <td><?php echo $precio ?></td>
-                        </tr>
-                        <?php 
+                    if($resultado -> num_rows >0){
+                        while ($fila = $resultado -> fetch_assoc()) {
+                            $nombre=$fila["nombre"];
+                            $talla=$fila["talla"];
+                            $precio=$fila["precio"];
+                            $categoria=$fila["categoria"];
+                            ?>
+                            <tr>
+                                <td><?php echo $nombre ?></td>
+                                <td><?php echo $talla ?></td>
+                                <td><?php echo $precio ?></td>
+                                <td><?php echo $categoria ?></td>
+                            </tr>
+                            <?php 
+                        }
                     }
-                }
-                ?>
-            </tbody>
-        </table>
+                    ?>
+                </tbody>
+                </table>
+            </div>
+                <div class="col-3">
+                    <img width="200"heigth="200" src="../../resources/images/ropa.jpg">
+                </div>
         </div>
     </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"

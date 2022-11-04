@@ -37,6 +37,7 @@
     }
     ?>
     <div class="container">
+    <?php require '../header.php' ?>
         <h1>Nueva Prendida</h1>
         <div class="row">
             <div class="col-6">
@@ -72,6 +73,7 @@
                     </div>
             
                     <button class="btn btn-primary" type="submit">Crear</button>
+                    <a class="btn btn-secondary" href="index.php">Ver prendas</a>
                 </form> 
             </div>
         </div>
