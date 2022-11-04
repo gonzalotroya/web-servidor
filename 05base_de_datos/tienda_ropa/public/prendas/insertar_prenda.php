@@ -11,13 +11,23 @@
 </head>
 <body>
     <?php 
-    require 'utils/database.php';
+    require '../../utils/database.php';
     if($_SERVER["REQUEST_METHOD"]=="POST"){
         $nombre=$_POST["nombre"];
         $talla=$_POST["talla"];
         $precio=$_POST["precio"];
+        if(isset($_POST["categoria"])){
+            $categoria=$_POST["categoria"];
+        }else{
+            $categoria="";
+        }
+
         if(!empty($nombre)&&!empty($talla)&&!empty($precio)){
+            if(!empty($categoria)){
+            $sql="INSERT INTO prendas(nombre,talla,precio,categoria) VALUES ('$nombre','$talla','$precio','$categoria')";
+        }else {
             $sql="INSERT INTO prendas(nombre,talla,precio) VALUES ('$nombre','$talla','$precio')";
+        }
         if($conexion -> query($sql)=="TRUE"){
             echo "<p>Prenda insertada</p>";
         }else{
@@ -33,8 +43,12 @@
                 <form action="" method="post">
                     <div class="from-group mb">
                         <label class="from-label">Nombre</label>
-                        <select class="form-select" name="nombre">
-                        <option selected>Abir</option>
+                        <input class="form-control" type="text" name="nombre">
+                    </div>
+                    <div class="from-group mb">
+                        <label class="from-label">Categoria</label>
+                        <select class="form-select" name="categoria">
+                        <option selected disabled hidden>Abir</option>
                         <option value="Camisetas">Camisetas</option>
                         <option value="Pantalones">Pantalones</option>
                         <option value="Accesorios">Accesorios</option>
@@ -43,7 +57,7 @@
                     <div class="from-group mb">
                         <label class="from-label">Talla</label>
                         <select class="form-select" name="talla">
-                        <option selected>Abir</option>
+                        <option value="" selected disabled hidden>Abir</option>
                         <option value="XS">XS</option>
                         <option value="S">S</option>
                         <option value="M">M</option>

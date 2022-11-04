@@ -25,7 +25,7 @@
             </thead>
             <tbody>
                 <?php 
-                require 'utils/database.php';
+                require '../../utils/database.php';
                 $sql ="SELECT * FROM prendas";
                 $resultado=$conexion ->query($sql);
 
