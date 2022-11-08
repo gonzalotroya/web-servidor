@@ -23,14 +23,27 @@
                         <th>Talla</th>
                         <th>Precio</th>
                         <th>Categoria</th>
+                        <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php 
                     require '../../utils/database.php';
+                    if($_SERVER["REQUEST_METHOD"]=="POST"){
+                        $id=$_POST["id"];
+                        $sql ="DELETE FROM prendas WHERE id='$id'";
+                        $resultado=$conexion ->query($sql);
+                        if($conexion -> query($sql)){
+                            ?><div class="alert alert-success" role="alert"><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><?php echo "<p>Registro borrado</p>";?></button></div><?php 
+                        }else{
+                            ?><div class="alert alert-danger" role="alert"><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><?php echo "<p>Error al borrar</p>";?></button></div><?php 
+                        }
+                    }
                     $sql ="SELECT * FROM prendas";
                     $resultado=$conexion ->query($sql);
-
+                    
+                    
                     if($resultado -> num_rows >0){
                         while ($fila = $resultado -> fetch_assoc()) {
                             $nombre=$fila["nombre"];
@@ -43,6 +56,18 @@
                                 <td><?php echo $talla ?></td>
                                 <td><?php echo $precio ?></td>
                                 <td><?php echo $categoria ?></td>
+                                <td>
+                                    <form action="mostrar_prendas.php" method="get">
+                                        <button class="btn btn-primary" type="submit">Ver</button>
+                                        <input type="hidden" name="id" value="<?php echo $fila["id"]?>">
+                                    </form>
+                                </td>
+                                <td>
+                                    <form action="" method="post">
+                                        <button class="btn btn-danger" type="submit">Borrar</button>
+                                        <input type="hidden" name="id" value="<?php echo $fila["id"]?>">
+                                    </form>
+                                </td>
                             </tr>
                             <?php 
                         }
