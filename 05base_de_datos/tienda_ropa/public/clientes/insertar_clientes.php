@@ -24,17 +24,38 @@
         }else{
             $apellido_2="";
         }
-    
         $apellido_2=!empty($apellido_2) ? "'$apellido_2'" : "NULL";
+        $file_name=$_FILES["imagen"]["name"];
+        $file_temp_name=$_FILES["imagen"]["tmp_name"];
+        $path="../../resources/images/avatar/". $file_name;
 
 
-        $sql= "INSERT INTO clientes (usuario,nombre,apellido_1,apellido_2,fecha_nacimiento) VALUES ('$usuario','$nombre','$apellido_1','$apellido_2','$fecha_nacimiento')";
+        
+
+        if(!empty($usuario)&&!empty($nombre)&&!empty($apellido_1)&&!empty($apellido_2)&&!empty($fecha_nacimiento)){
+            if(move_uploaded_file($file_temp_name, $path)){
+                echo "<p>Fichero movido con exito</p>";
+            }else {
+                echo "<p>No se pudo mover el fichero</p>";
+            }
+        if (empty($imagen))
+            {
+                $imagen ="/resources/images/avatar/default.jpg";
+            }else {
+             $imagen="/resources/images/avatar/". $file_name;
+            }
+        $sql= "INSERT INTO clientes (usuario,nombre,apellido_1,apellido_2,fecha_nacimiento,imagen) VALUES ('$usuario','$nombre','$apellido_1',$apellido_2,'$fecha_nacimiento','$imagen')";
             if($conexion -> query($sql)=="TRUE"){
                 ?><div class="alert alert-success" role="alert"><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><?php echo "<p>clientes Insertado</p>";?></button></div><?php 
             }else{
                 ?><div class="alert alert-danger" role="alert"><?php echo "<p>Error al insertar</p>";?></div><?php 
             }
+       
         }
+    }
+
+
+        
     
     ?>
     <div class="container">
@@ -45,7 +66,7 @@
 
         <div class="row">
             <div class="col-6">
-                <form action="" method="post">
+                <form action="" method="post" enctype="multipart/form-data">
                     <div class="form-group mb-3">
                     <label class="form-label">Usuario</label>
                     <input class="form-control" type="text" name="usuario">
@@ -65,6 +86,10 @@
                     <div class="form-group mb-3">
                     <label class="form-label">fecha_nacimiento</label>
                     <input class="form-control" type="date" name="fecha_nacimiento">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-lablel">Imagen</label>
+                        <input class="form-control" type="file" name="imagen">
                     </div>
                     <button class="btn btn-primary" type="submit">Crear</button>
                     <a class="btn-btn-secundary" href="index.php">Volver</a>

@@ -13,49 +13,52 @@
 <div class="container">
             <?php require '../../utils/database.php'; ?>
             <?php require '../header.php' ?>
-            <h1>Editar prendas</h1>
+            <h1>Editar clientes</h1>
         <div class="row">
             <div class="col-6">
                 <?php
                 if($_SERVER["REQUEST_METHOD"]=="GET"){
                    $id=$_GET["id"];
+                   $usuario=$_GET["usuario"];
                    $nombre=$_GET["nombre"];
-                   $talla=$_GET["talla"];
-                   $precio=$_GET["precio"];
-                   $categoria=$_GET["categoria"];
+                   $apellido_1=$_GET["apellido_1"];
+                   $apellido_2=$_GET["apellido_2"];
+                   $fecha_nacimiento=$_GET["fecha_nacimiento"];
                 }
 
                    if($_SERVER["REQUEST_METHOD"]=="POST"){
                     $id=$_POST["id"];
+                    $usuario=$_POST["usuario"];
                     $nombre=$_POST["nombre"];
-                    $talla=$_POST["talla"];
-                    $precio=$_POST["precio"];
-                    $categoria=$_POST["categoria"];
+                    $apellido_1=$_POST["apellido_1"];
+                    $apellido_2=$_POST["apellido_2"];
+                    $fecha_nacimiento=$_POST["fecha_nacimiento"];
 
-                    $sql ="UPDATE prendas SET nombre='$nombre',talla='$talla',precio='$precio'
-                    ,categoria='$categoria' WHERE id='$id'";
+                    $sql ="UPDATE clientes SET usuario='$usuario',nombre='$nombre',apellido_1='$apellido_1',apellido_2='$apellido_2'
+                    ,fecha_nacimiento='$fecha_nacimiento' WHERE id='$id'";
                     
                     if($conexion -> query($sql)=="TRUE"){
                         ?><div class="alert alert-success" role="alert">
-                            <?php echo "<p>Prenda insertada</p>";?>
+                            <?php echo "<p>Cliente insertado</p>";?>
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
                                 </button></div><?php 
 
                     }else{
                         ?><div class="alert alert-danger" role="alert">
-                            Error al modificar
+                            <?php echo "<p>Error al modificar</p>";?>
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
                                 </button></div><?php 
                     }
                    }
-                    $sql ="SELECT * FROM prendas";
+                    $sql ="SELECT * FROM clientes";
                             $resultado=$conexion ->query($sql);
                             if($resultado -> num_rows >0){
                                 while ($fila = $resultado -> fetch_assoc()) {
+                                    $usuario=$fila["usuario"];
                                     $nombre=$fila["nombre"];
-                                    $talla=$fila["talla"];
-                                    $precio=$fila["precio"];
-                                    $categoria=$fila["categoria"];
+                                    $apellido_1=$fila["apellido_1"];
+                                    $apellido_2=$fila["apellido_2"];
+                                    $fecha_nacimiento=$fila["fecha_nacimiento"];
                                     $imagen=$fila["imagen"];
                                 }
                             }
@@ -63,38 +66,30 @@
                 ?>
             </div>
             <form action="" method="post" enctype="multipart/form-data">
+                     <div class="from-group mb">
+                        <label class="from-label">Usuario</label>
+                        <input class="form-control" type="text" value="<?php echo $usuario ?>" name="usuario">
+                    </div>
                     <div class="from-group mb">
                         <label class="from-label">Nombre</label>
                         <input class="form-control" type="text" value="<?php echo $nombre ?>" name="nombre">
                     </div>
                     <div class="from-group mb">
-                        <label class="from-label">Categoria</label>
-                        <select class="form-select" name="categoria">
-                        <option value="<?php echo $categoria ?>"selected hidden><?php echo ucfirst(strtolower($categoria)) ?></option>
-                        <option value="Camisetas">Camisetas</option>
-                        <option value="Pantalones">Pantalones</option>
-                        <option value="Accesorios">Accesorios</option>
-                        </select>
+                        <label class="from-label">apellido_1</label>
+                        <input class="form-control" type="text" value="<?php echo $apellido_1 ?>" name="apellido_1">
                     </div>
                     <div class="from-group mb">
-                        <label class="from-label">Talla</label>
-                        <select class="form-select" name="talla">
-                        <option value="<?php echo $talla ?>" selected hidden><?php echo ucfirst(strtolower($talla)) ?></option>
-                        <option value="XS">XS</option>
-                        <option value="S">S</option>
-                        <option value="M">M</option>
-                        <option value="L">L</option>
-                        <option value="XL">XL</option>
-                        </select>
+                        <label class="from-label">apellido_2</label>
+                        <input class="form-control" type="text" value="<?php echo $apellido_2 ?>" name="apellido_2">
+                    </div>
 
-                    </div>
                     <div class="from-group mb">
-                        <label class="from-label">Precio</label>
-                        <input class="form-control" type="text" value="<?php echo $precio ?>" name="precio">
+                        <label class="from-label">fecha_nacimiento</label>
+                        <input class="form-control" type="date" value="<?php echo $fecha_nacimiento ?>" name="fecha_nacimiento">
                     </div>
                     <input type="hidden" name="id" value="<?php echo $id ?>">
                         <button class="btn btn-primary" type="submit">Modificar</button>
-                    <a class="btn btn-secondary" href="index.php">Ver prendas</a>
+                    <a class="btn btn-secondary" href="index.php">Ver clientes</a>
                 </form> 
             <div class="col-6">
                     <img width="200" height="300" class="col-md-6 float-md-start mb-3 ms-md-3" src="../../<?php echo $imagen ?>">

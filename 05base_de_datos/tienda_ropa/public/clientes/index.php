@@ -15,19 +15,43 @@
         <h1>Listado de clientes</h1>
         <div class="row">
             <div class="col-9">
-                <table class=" table table-striped table-hover">
-                    <thead>
+                <table class=" table table-striped table-hover ">
+                    <thead class="table table-dark">
                         <tr>
-                            <th class="table table-dark">Usuario</th>
-                            <th class="table table-dark">Nombre</th>
-                            <th class="table table-dark">Apellido1</th>
-                            <th class="table table-dark">Apellido1</th>
-                            <th class="table table-dark">fecha_nacimiento</th>
+                            <th>Usuario</th>
+                            <th></th>
+                            <th>Nombre</th>
+                            <th>Apellido1</th>
+                            <th>Apellido1</th>
+                            <th>fecha_nacimiento</th>
+                            <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
+                        
                             require '../../utils/database.php';
+                            if($_SERVER["REQUEST_METHOD"]=="POST"){
+                                $id=$_POST["id"];
+                                $sql="SELECT imagen FROM clientes WHERE id='$id'";
+                                $resultado=$conexion ->query($sql);
+                                if($resultado -> num_rows >0){
+                                    while ($fila = $resultado -> fetch_assoc()) {
+                                        $imagen=$fila["imagen"];
+                                    }
+                                    unlink("../.." . $imagen);
+                                }
+                                $sql ="DELETE FROM clientes WHERE id='$id'";
+                                $resultado=$conexion ->query($sql);
+                                if($conexion -> query($sql)){
+                                    ?><div class="alert alert-success" role="alert"><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><?php echo "<p>Registro borrado</p>";?></button></div><?php 
+                                
+                                }else{
+                                    ?><div class="alert alert-danger" role="alert"><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><?php echo "<p>Error al borrar</p>";?></button></div><?php 
+                                }
+                            }
+
                             $sql="SELECT * FROM clientes";
                             $resultado=$conexion -> query($sql);
 
@@ -38,13 +62,34 @@
                                     $apellido_1=$fila["apellido_1"];
                                     $apellido_2=$fila["apellido_2"];
                                     $fecha_nacimiento=$fila["fecha_nacimiento"];
+                                    $imagen=$fila["imagen"];                
+                                    
+
+                                    if (empty($imagen))
+                                            {
+                                                $imagen ="/resources/images/avatar/default.jpg";
+                                            }
+                                    
                                     ?>
                                         <tr>
                                             <td><?php echo $usuario?></td>
+                                            <td><img width="50" height="60" src="../../<?php  echo $imagen ?>"></td>
                                             <td><?php echo $nombre?></td>
                                             <td><?php echo $apellido_1?></td>
                                             <td><?php echo $apellido_2?></td>
                                             <td><?php echo $fecha_nacimiento?></td>
+                                            <td>
+                                                <form action="mostrar_clientes.php" method="get">
+                                                    <button class="btn btn-primary" type="submit">Ver</button>
+                                                    <input type="hidden" name="id" value="<?php echo $fila["id"]?>">
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <form action="" method="post">
+                                                    <button class="btn btn-danger" type="submit">Borrar</button>
+                                                    <input type="hidden" name="id" value="<?php echo $fila["id"]?>">
+                                                </form>
+                                            </td>
                                         </tr>
                                     <?php
                                 }
