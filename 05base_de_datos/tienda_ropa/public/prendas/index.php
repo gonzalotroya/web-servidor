@@ -20,6 +20,7 @@
                 <thead class="table table-dark">
                     <tr>
                         <th>Nombre</th>
+                        <th></th>
                         <th>Talla</th>
                         <th>Precio</th>
                         <th>Categoria</th>
@@ -32,10 +33,19 @@
                     require '../../utils/database.php';
                     if($_SERVER["REQUEST_METHOD"]=="POST"){
                         $id=$_POST["id"];
+                        $sql="SELECT imagen FROM prendas WHERE id='$id'";
+                        $resultado=$conexion ->query($sql);
+                        if($resultado -> num_rows >0){
+                            while ($fila = $resultado -> fetch_assoc()) {
+                                $imagen=$fila["imagen"];
+                            }
+                            unlink("../.." . $imagen);
+                        }
                         $sql ="DELETE FROM prendas WHERE id='$id'";
                         $resultado=$conexion ->query($sql);
                         if($conexion -> query($sql)){
                             ?><div class="alert alert-success" role="alert"><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><?php echo "<p>Registro borrado</p>";?></button></div><?php 
+                        
                         }else{
                             ?><div class="alert alert-danger" role="alert"><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><?php echo "<p>Error al borrar</p>";?></button></div><?php 
                         }
@@ -50,9 +60,11 @@
                             $talla=$fila["talla"];
                             $precio=$fila["precio"];
                             $categoria=$fila["categoria"];
+                            $imagen=$fila["imagen"];
                             ?>
                             <tr>
                                 <td><?php echo $nombre ?></td>
+                                <td><img width="50" height="60" src="../../<?php echo $imagen ?>"></td>
                                 <td><?php echo $talla ?></td>
                                 <td><?php echo $precio ?></td>
                                 <td><?php echo $categoria ?></td>
