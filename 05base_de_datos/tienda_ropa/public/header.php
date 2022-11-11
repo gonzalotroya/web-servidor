@@ -15,7 +15,9 @@
         <a class="nav-link" href="http://localhost/05base_de_datos/tienda_ropa/public/prendas/insertar_prenda.php">Insertar Prenda</a>
         <a class="nav-link" href="http://localhost/05base_de_datos/tienda_ropa/public/clientes/">Cliente</a>
         <a class="nav-link" href="http://localhost/05base_de_datos/tienda_ropa/public/clientes/insertar_clientes.php">Insertar Cliente</a>  
-    </div>
+        <a class="nav-link" href="http://localhost/05base_de_datos/tienda_ropa/public/compras/compras.php">Compras</a>  
+        <a class="nav-link" href="http://localhost/05base_de_datos/tienda_ropa/public/compras/nueva_compra.php">Nueva compra</a>  
+      </div>
     </div>
   </div>
 </nav>
