@@ -15,7 +15,7 @@
         <?php require '../header.php' ?>
         <?php 
         if($_SERVER["REQUEST_METHOD"]=="GET"){
-            $usuario=$_GET["usuario"];
+            //$usuario=$_GET["usuario"];
         }
         ?>
         <h1>Compras de <?php echo $usuario; ?></h1>
@@ -29,12 +29,26 @@
                             <th>Talla</th>
                             <th>Cantidad</th>
                             <th>Precio</th>
-                            <th>Fecha</th>                  
+                            <!--<th>Fecha</th>-->        
+                            <th></th>
+                            <th></th>          
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                    $precio_total=0;
+                        if($_SERVER["REQUEST_METHOD"]=="POST"){
+                            $sql="INSERT INTO clientes_prendas(cliente_id,,prendas_id,cantidad,fecha,talla,)
+                             VALUES ('Señorito','$nombre','$cantidad','$fecha','$talla')";
+
+                            $resultado=$conexion ->query($sql);
+                            if($conexion -> query($sql)){
+                                ?><div class="alert alert-success" role="alert"><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><?php echo "<p>Compra exitosa</p>";?></button></div><?php 
+                            
+                            }else{
+                                ?><div class="alert alert-danger" role="alert"><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><?php echo "<p>Error al comprar</p>";?></button></div><?php 
+                            }
+                        }
+                        $precio_total=0;
                         $sql="SELECT *FROM prendas";
                         $resultado=$conexion -> query($sql);
                 
@@ -43,15 +57,17 @@
                                 $nombre=$fila["nombre"];
                                 $talla=$fila["talla"];
                                 $precio=$fila["precio"];
-                                $categoria=$fila["categoria"];
+                               // $cantidad=$fila["cantidad"];
+                                //$fecha=$fila["fecha"];
                                 $imagen=$fila["imagen"];
 
-                                $precio_total +=($precio_unitario * $cantidad);
+                                //$precio_total +=($precio * $cantidad);
 
                                     ?>
                                         <tr>
                                             <td><?php echo $nombre?></td>
-                                            <td><<select class="form-select" name="talla">
+                                            <td><img width="50" height="60" src="../../<?php  echo $imagen ?>"></td>
+                                            <td><select class="form-select" name="talla">
                                             <option selected disabled hidden>Abir</option>
                                             <option value="XS">XS</option>
                                             <option value="S">S</option>
@@ -67,7 +83,13 @@
                                             <option value="6">6</option>
                                             <?php echo $cantidad?></select></td>
                                             <td><?php echo $precio?></td>
-                                            <td><?php echo $fecha ?></td>
+                                            <td><?php //echo $fecha ?></td>
+                                            <td>
+                                                <form action="" method="post">
+                                                    <button class="btn btn-primary" type="submit">Comprar</button>
+                                                    <input type="hidden" name="id" value="<?php echo $fila["id"]?>">
+                                                </form>
+                                            </td>
                                         </tr>
                                     <?php
                                 }
@@ -75,7 +97,7 @@
                         ?>
                     </tbody>
                 </table>
-                <h4><span class="badge bg-success">Total: <?php echo $precio_total ?>€</span></h4>
+                <h4><span class="badge bg-success">Total: <?php echo $precio ?>€</span></h4>
             </div>
         </div>
     </div>
