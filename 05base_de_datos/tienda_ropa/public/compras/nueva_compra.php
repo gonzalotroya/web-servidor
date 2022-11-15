@@ -14,9 +14,23 @@
         <?php require '../../utils/database.php'; ?>
         <?php require '../header.php' ?>
         <?php 
-        if($_SERVER["REQUEST_METHOD"]=="GET"){
-            //$usuario=$_GET["usuario"];
-        }
+        if($_SERVER["REQUEST_METHOD"]=="POST"){
+            $prenda=$_POST["prenda"];
+            $cantidad=$_POST["cantidad"];
+            $talla=$_POST["talla"];
+            $cliente_id=21;
+            $fecha=date('Y-m-d H:i:s');
+        
+            $sql="INSERT INTO clientes_prendas(cliente_id,prenda_id,cantidad,fecha,talla)
+             VALUES ('$cliente_id','$prenda','$cantidad','$fecha','$talla')";
+
+            if($conexion -> query($sql)==TRUE){
+                ?><div class="alert alert-success" role="alert"><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><?php echo "<p>Compra exitosa</p>";?></button></div><?php 
+            
+            }else{
+                ?><div class="alert alert-danger" role="alert"><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><?php echo "<p>Error al comprar</p>";?></button></div><?php 
+            }
+        }      
         ?>
         <h1>Compras de <?php echo $usuario; ?></h1>
         <div class="row">
@@ -29,75 +43,51 @@
                             <th>Talla</th>
                             <th>Cantidad</th>
                             <th>Precio</th>
-                            <!--<th>Fecha</th>-->        
                             <th></th>
-                            <th></th>          
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        if($_SERVER["REQUEST_METHOD"]=="POST"){
-                            $sql="INSERT INTO clientes_prendas(cliente_id,,prendas_id,cantidad,fecha,talla,)
-                             VALUES ('Señorito','$nombre','$cantidad','$fecha','$talla')";
-
-                            $resultado=$conexion ->query($sql);
-                            if($conexion -> query($sql)){
-                                ?><div class="alert alert-success" role="alert"><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><?php echo "<p>Compra exitosa</p>";?></button></div><?php 
-                            
-                            }else{
-                                ?><div class="alert alert-danger" role="alert"><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><?php echo "<p>Error al comprar</p>";?></button></div><?php 
-                            }
-                        }
                         $precio_total=0;
                         $sql="SELECT *FROM prendas";
                         $resultado=$conexion -> query($sql);
                 
                         if($resultado -> num_rows > 0){
                             while ($fila = $resultado -> fetch_assoc()){
-                                $nombre=$fila["nombre"];
-                                $talla=$fila["talla"];
-                                $precio=$fila["precio"];
-                               // $cantidad=$fila["cantidad"];
-                                //$fecha=$fila["fecha"];
-                                $imagen=$fila["imagen"];
-
-                                //$precio_total +=($precio * $cantidad);
-
                                     ?>
-                                        <tr>
-                                            <td><?php echo $nombre?></td>
-                                            <td><img width="50" height="60" src="../../<?php  echo $imagen ?>"></td>
-                                            <td><select class="form-select" name="talla">
-                                            <option selected disabled hidden>Abir</option>
-                                            <option value="XS">XS</option>
-                                            <option value="S">S</option>
-                                            <option value="M">M</option>
-                                            <option value="L">L</option>
-                                            <option value="XL">XL</option>
-                                            <?php echo $cantidad?></select></td>
-                                            <td><select class="form-select" name="cantidad"><option selected hidden>1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value="5">5</option>
-                                            <option value="6">6</option>
-                                            <?php echo $cantidad?></select></td>
-                                            <td><?php echo $precio?></td>
-                                            <td><?php //echo $fecha ?></td>
-                                            <td>
-                                                <form action="" method="post">
+                                        <form action="" method="post">
+                                            <tr>
+                                                <td><?php echo $fila["nombre"]?></td>
+                                                <td><img width="50" height="60" src="../../<?php  echo $fila["imagen"]  ?>"></td>
+                                                <td><select class="form-select" name="talla">
+                                                <option selected disabled hidden>Abir</option>
+                                                <option value="XS">XS</option>
+                                                <option value="S">S</option>
+                                                <option value="M">M</option>
+                                                <option value="L">L</option>
+                                                <option value="XL">XL</option>
+                                                </select></td>
+                                                <td><select class="form-select" name="cantidad"><option selected hidden>1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                </select></td>
+                                                <td><?php echo $fila["precio"]?></td>
+                                                <td>
+                                                    <input type="hidden" name="prenda" value="<?php echo $fila["id"]?>">
                                                     <button class="btn btn-primary" type="submit">Comprar</button>
-                                                    <input type="hidden" name="id" value="<?php echo $fila["id"]?>">
-                                                </form>
-                                            </td>
-                                        </tr>
+                                                    
+                                                </td>
+                                            </tr>
+                                        </form>
                                     <?php
                                 }
                             }
                         ?>
                     </tbody>
                 </table>
-                <h4><span class="badge bg-success">Total: <?php echo $precio ?>€</span></h4>
             </div>
         </div>
     </div>
