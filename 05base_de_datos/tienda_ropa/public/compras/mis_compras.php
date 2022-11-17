@@ -30,6 +30,7 @@
                 <table class="table table-striped table-hover">
                 <thead class="table table-dark">
                     <tr>
+                        <th>Usuario</th>
                         <th>Nombre</th>
                         <th></th>
                         <th>Talla</th>
@@ -61,7 +62,7 @@
                             ?><div class="alert alert-danger" role="alert"><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><?php echo "<p>Error al borrar</p>";?></button></div><?php 
                         }
                     }
-                    $sql ="SELECT * FROM prendas";
+                    $sql ="SELECT *FROM vw_misprendas;";
                     $resultado=$conexion ->query($sql);
                     
                     
@@ -72,8 +73,10 @@
                             $precio=$fila["precio"];
                             $categoria=$fila["categoria"];
                             $imagen=$fila["imagen"];
+                            
                             ?>
                             <tr>
+                                <td><?php echo $_SESSION["usuario"] ?></td>
                                 <td><?php echo $nombre ?></td>
                                 <td><img width="50" height="60" src="../../<?php echo $imagen ?>"></td>
                                 <td><?php echo $talla ?></td>

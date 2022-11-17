@@ -54,9 +54,9 @@
                     <input type="hidden" name="talla" value="<?php echo $talla ?>">
                     <input type="hidden" name="precio" value="<?php echo $precio ?>">
                     <input type="hidden" name="categoria" value="<?php echo $categoria ?>">
-                    
+                    <?php if($_SESSION["rol"]=='administrador'){?>
                     <button class="btn btn-secondary" href="editar_prenda.php">Editar</button>
-
+                    <?php } ?>
                 </form>
             </div>
             <div class="col-6">

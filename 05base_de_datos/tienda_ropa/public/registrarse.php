@@ -20,6 +20,7 @@
         $apellido_1=$_POST["apellido_1"];
         $apellido_2=$_POST["apellido_2"];
         $fecha_nacimiento=$_POST["fecha_nacimiento"];
+        $rol=$_POST["rol"];
         $hash_contrasena= password_hash($contrasena,PASSWORD_DEFAULT);
 
         if(isset($_POST["apellido_2"])){
@@ -47,7 +48,8 @@
             }else {
              $imagen="/resources/images/avatar/". $file_name;
             }
-        $sql= "INSERT INTO clientes (usuario,contrasena,nombre,apellido_1,apellido_2,fecha_nacimiento,imagen) VALUES ('$usuario','$hash_contrasena','$nombre','$apellido_1',$apellido_2,'$fecha_nacimiento','$imagen')";
+        $sql= "INSERT INTO clientes (usuario,contrasena,nombre,apellido_1,apellido_2,fecha_nacimiento,imagen,rol)
+        VALUES ('$usuario','$hash_contrasena','$nombre','$apellido_1',$apellido_2,'$fecha_nacimiento','$imagen','$rol')";
             if($conexion -> query($sql)=="TRUE"){
                 ?><div class="alert alert-success" role="alert"><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><?php echo "<p>clientes Insertado</p>";?></button></div><?php 
             }else{
@@ -97,6 +99,14 @@
                     <div class="form-group mb-3">
                         <label class="form-lablel">Imagen</label>
                         <input class="form-control" type="file" name="imagen">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">Rol</label>
+                        <select class="form-select" name="rol">
+                        <option selected disabled hidden>Abir</option>
+                        <option value="administrador">administrador</option>
+                        <option value="usuario">usuario</option>
+                        </select>
                     </div>
                     <button class="btn btn-primary" type="submit">Crear</button>
                     <a class="btn-btn-secundary" href="index.php">Volver</a>

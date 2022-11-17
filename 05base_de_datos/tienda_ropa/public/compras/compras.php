@@ -11,10 +11,11 @@
 </head>
 <body>
     <div class="container">
-        <?php require '../../utils/database.php'; ?>
+        <?php
+                        session_start();
+        require '../../utils/database.php'; ?>
         <?php require '../header.php' ?>
         <?php
-                session_start();
                 if(!isset($_SESSION["usuario"])){
                     header("location: http://localhost/05base_de_datos/tienda_ropa/public/iniciar_sesion.php");
                 }else{

@@ -25,6 +25,8 @@
             if($resultado -> num_rows > 0){
                 while ($fila = $resultado -> fetch_assoc()){
                 $hash_contrasena=$fila["contrasena"];
+                $rol=$fila["rol"];
+
                 }
                 $acceso_valido=password_verify($contrasena,$hash_contrasena);
                 if($acceso_valido==TRUE){
@@ -32,6 +34,8 @@
                     
                     session_start();
                     $_SESSION["usuario"]=$usuario;
+                    $_SESSION["rol"]=$rol;
+
 
                     header('location:index.php');
                 }else{
@@ -54,6 +58,9 @@
                     </div>
                     <div class="form-group mb-3">
                         <button class="btn btn-primary" type="submit">Iniciar sesion</button>
+                    </div>
+                    <div class="form-group mb-3">
+                        <a class="btn btn-secondary" href="registrarse.php">Registrarse</a>
                     </div>
                 </form>
             </div>

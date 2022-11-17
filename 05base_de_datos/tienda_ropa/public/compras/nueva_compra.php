@@ -11,10 +11,11 @@
 </head>
 <body>
     <div class="container">
-        <?php require '../../utils/database.php'; ?>
+        <?php 
+                        session_start();
+                        require '../../utils/database.php'; ?>
         <?php require '../header.php' ?>
         <?php
-                session_start();
                 if(!isset($_SESSION["usuario"])){
                     header("location: http://localhost/05base_de_datos/tienda_ropa/public/iniciar_sesion.php");
                 }else{
@@ -26,9 +27,17 @@
             $prenda=$_POST["prenda"];
             $cantidad=$_POST["cantidad"];
             $talla=$_POST["talla"];
-            $cliente_id=21;
+            //$cliente_id=21;
             $fecha=date('Y-m-d H:i:s');
         
+            $usuario=$_SESSION["usuario"];
+            $sql="SELECT * FROM clientes WHERE usuario='$usuario'";
+            if($resultado -> num_rows > 0){
+                while ($fila = $resultado -> fetch_assoc()){
+                $cliente_id=$fila["id"];
+                }
+            }
+
             $sql="INSERT INTO clientes_prendas(cliente_id,prenda_id,cantidad,fecha,talla)
              VALUES ('$cliente_id','$prenda','$cantidad','$fecha','$talla')";
 
@@ -40,7 +49,7 @@
             }
         }      
         ?>
-        <h1>Compras de <?php echo $usuario; ?></h1>
+        <h1>Compras de <?php echo $_SESSION["usuario"]; ?></h1>
         <div class="row">
             <div class="col-9">
                 <table class=" table table-striped table-hover ">

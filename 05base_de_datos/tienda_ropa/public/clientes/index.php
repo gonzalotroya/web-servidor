@@ -10,18 +10,21 @@
 </head>
 <body>
     <div class="container">
-    <?php require '../header.php' 
+        
+    <?php  session_start();
+    require '../header.php';
     ?>
         <h1>Listado de clientes</h1>
         <div class="row">
             <div class="col-9">
                 <?php
-                session_start();
-                if(!isset($_SESSION["usuario"])){
+                if(!isset($_SESSION["usuario"]) || ($_SESSION["rol"])!=='administrador'){
                     header("location: http://localhost/05base_de_datos/tienda_ropa/public/iniciar_sesion.php");
+                    
                 }else{
                 echo "<p> Has iniciado sesión ". $_SESSION["usuario"]."</p>"; 
                 }
+               
                 ?>
                 <table class=" table table-striped table-hover ">
                     <thead class="table table-dark">

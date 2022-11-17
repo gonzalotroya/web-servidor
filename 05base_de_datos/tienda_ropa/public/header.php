@@ -12,10 +12,30 @@
       <div class="navbar-nav">
         <a class="nav-link active" aria-current="page" href="http://localhost/05base_de_datos/tienda_ropa/public/">Inicio</a>
         <a class="nav-link" href="http://localhost/05base_de_datos/tienda_ropa/public/prendas/index.php">Prendas</a>
+        
+        <?php 
+        if($_SESSION["rol"]!=='administrador'){ ?>
+        <a class="nav-link" hidden href="http://localhost/05base_de_datos/tienda_ropa/public/prendas/insertar_prenda.php">Insertar Prenda</a>
+        <?php }else{ ?>
         <a class="nav-link" href="http://localhost/05base_de_datos/tienda_ropa/public/prendas/insertar_prenda.php">Insertar Prenda</a>
-        <a class="nav-link" href="http://localhost/05base_de_datos/tienda_ropa/public/clientes/">Cliente</a>
-        <a class="nav-link" href="http://localhost/05base_de_datos/tienda_ropa/public/clientes/insertar_clientes.php">Insertar Cliente</a>  
-        <a class="nav-link" href="http://localhost/05base_de_datos/tienda_ropa/public/compras/compras.php">Compras</a>  
+        <?php } ?>
+        
+        <?php 
+        if($_SESSION["rol"]!=='administrador'){ ?>
+        <a class="nav-link" hidden href="http://localhost/05base_de_datos/tienda_ropa/public/clientes/">Cliente</a>
+        <?php }else{ ?>
+          <a class="nav-link" href="http://localhost/05base_de_datos/tienda_ropa/public/clientes/">Cliente</a>
+        <?php } ?>
+       
+        <?php 
+        if($_SESSION["rol"]!=='administrador'){ ?>
+        <a class="nav-link" hidden href="http://localhost/05base_de_datos/tienda_ropa/public/clientes/insertar_clientes.php">Insertar Cliente</a>  
+        <a class="nav-link" hidden href="http://localhost/05base_de_datos/tienda_ropa/public/compras/compras.php">Compras</a>  
+
+        <?php }else{ ?>
+          <a class="nav-link" href="http://localhost/05base_de_datos/tienda_ropa/public/clientes/insertar_clientes.php">Insertar Cliente</a>  
+        <?php } ?>
+        <a class="nav-link" href="http://localhost/05base_de_datos/tienda_ropa/public/compras/mis_compras.php">Mis compras</a>  
         <a class="nav-link" href="http://localhost/05base_de_datos/tienda_ropa/public/compras/nueva_compra.php">Nueva compra</a>  
       </div>
     </div>
