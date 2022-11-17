@@ -12,6 +12,14 @@
 <body>
    <div class="container">
         <?php require '../header.php' ?>
+        <?php
+                session_start();
+                if(!isset($_SESSION["usuario"])){
+                    header("location: http://localhost/05base_de_datos/tienda_ropa/public/iniciar_sesion.php");
+                }else{
+                echo "<p> Has iniciado sesión ". $_SESSION["usuario"]."</p>"; 
+                }
+                ?>
         <h1>Listado de prendas</h1>
         <div class="row">
             <div class="col-9">

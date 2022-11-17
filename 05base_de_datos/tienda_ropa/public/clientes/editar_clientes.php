@@ -17,6 +17,14 @@
         <div class="row">
             <div class="col-6">
                 <?php
+                session_start();
+                if(!isset($_SESSION["usuario"])){
+                    header("location: http://localhost/05base_de_datos/tienda_ropa/public/iniciar_sesion.php");
+                }else{
+                echo "<p> Has iniciado sesión ". $_SESSION["usuario"]."</p>"; 
+                }
+                ?>
+                <?php
                 if($_SERVER["REQUEST_METHOD"]=="GET"){
                    $id=$_GET["id"];
                    $usuario=$_GET["usuario"];

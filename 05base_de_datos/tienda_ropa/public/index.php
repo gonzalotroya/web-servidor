@@ -14,6 +14,22 @@
     <?php require '../utils/database.php'; ?>
         <?php require 'header.php' ?>
      <h1>Bienvenido a nuestra tienda</h1>
+     <div class="row">
+            <div class="col-6">
+                <?php
+                session_start();
+                if(!isset($_SESSION["usuario"])){
+                    header("location:iniciar_sesion.php");
+                }else{
+                echo "<p> Has iniciado sesión ". $_SESSION["usuario"]."</p>"; 
+                }
+                ?>
+            </div>
+        </div>
+        <a href="desconectarse.php">Cerrar sesión</a>
+
+
+
         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">

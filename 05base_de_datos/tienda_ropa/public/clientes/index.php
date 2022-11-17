@@ -15,6 +15,14 @@
         <h1>Listado de clientes</h1>
         <div class="row">
             <div class="col-9">
+                <?php
+                session_start();
+                if(!isset($_SESSION["usuario"])){
+                    header("location: http://localhost/05base_de_datos/tienda_ropa/public/iniciar_sesion.php");
+                }else{
+                echo "<p> Has iniciado sesión ". $_SESSION["usuario"]."</p>"; 
+                }
+                ?>
                 <table class=" table table-striped table-hover ">
                     <thead class="table table-dark">
                         <tr>
@@ -30,7 +38,6 @@
                     </thead>
                     <tbody>
                         <?php
-                        
                             require '../../utils/database.php';
                             if($_SERVER["REQUEST_METHOD"]=="POST"){
                                 $id=$_POST["id"];

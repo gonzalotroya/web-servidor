@@ -11,16 +11,8 @@
 </head>
 
 <body>
-<?php
-                session_start();
-                if(!isset($_SESSION["usuario"])){
-                    header("location: http://localhost/05base_de_datos/tienda_ropa/public/iniciar_sesion.php");
-                }else{
-                echo "<p> Has iniciado sesión ". $_SESSION["usuario"]."</p>"; 
-                }
-                ?>
     <?php
-    require '../../utils/database.php';
+    require '../utils/database.php';
     if($_SERVER["REQUEST_METHOD"]=="POST"){
         $usuario=$_POST["usuario"];
         $contrasena=$_POST["contrasena"];
@@ -70,7 +62,7 @@
     
     ?>
     <div class="container">
-    <?php require '../header.php' 
+    <?php require 'header.php' 
 
     ?>
         <h1>Nuevo Usuario</h1>
