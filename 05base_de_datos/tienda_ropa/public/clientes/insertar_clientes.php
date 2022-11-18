@@ -15,8 +15,6 @@
                 session_start();
                 if(!isset($_SESSION["usuario"])|| ($_SESSION["rol"])!=='administrador'){
                     header("location: http://localhost/05base_de_datos/tienda_ropa/public/iniciar_sesion.php");
-                }else{
-                echo "<p> Has iniciado sesión ". $_SESSION["usuario"]."</p>"; 
                 }
                 ?>
     <?php

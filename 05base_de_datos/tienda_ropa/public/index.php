@@ -22,8 +22,6 @@
                 <?php
                 if(!isset($_SESSION["usuario"])){
                     header("location:iniciar_sesion.php");
-                }else{
-                echo "<p> Has iniciado sesión ". $_SESSION["usuario"]."</p>"; 
                 }
                 ?>
             </div>
@@ -31,10 +29,10 @@
         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                <img src="../resources/images/ropa.jpg" class="d-block w-100" alt="...">
+                <img src="../resources/images/ropa.jpg" class="d-block w-100" alt="..." height="500" width="10%">
                 </div>
                 <div class="carousel-item">
-                <img src="../resources/images/welcome.jpg" class="d-block w-100" alt="...">
+                <img src="../resources/images/welcome.jpg" class="d-block w-100" alt="..." height="30%" width="30%">
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -46,7 +44,7 @@
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
-        <a href="desconectarse.php">Cerrar sesión</a>
+        <a class="btn btn-secondary" href="desconectarse.php">Cerrar sesión</a>
     </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
 integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>

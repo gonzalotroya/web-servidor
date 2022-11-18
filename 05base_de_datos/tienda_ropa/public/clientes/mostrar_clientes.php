@@ -12,15 +12,12 @@
 <body>
 <?php  ?>
     <div class="container">
-            <?php require '../../utils/database.php'; ?>
+            <?php                 session_start(); require '../../utils/database.php'; ?>
             <?php require '../header.php' ?>
             <h1>Mostar cliente</h1>
             <?php
-                session_start();
                 if(!isset($_SESSION["usuario"])){
                     header("location: http://localhost/05base_de_datos/tienda_ropa/public/iniciar_sesion.php");
-                }else{
-                echo "<p> Has iniciado sesión ". $_SESSION["usuario"]."</p>"; 
                 }
                 ?>
         <div class="row">

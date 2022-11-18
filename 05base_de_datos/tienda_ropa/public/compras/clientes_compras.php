@@ -22,8 +22,6 @@
                 session_start();
                 if(!isset($_SESSION["usuario"])){
                     header("location: http://localhost/05base_de_datos/tienda_ropa/public/iniciar_sesion.php");
-                }else{
-                echo "<p> Has iniciado sesión ". $_SESSION["usuario"]."</p>"; 
                 }
                 ?>
         <h1>Compras de <?php echo $usuario; ?></h1>

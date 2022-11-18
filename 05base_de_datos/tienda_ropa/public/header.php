@@ -38,6 +38,7 @@
         <a class="nav-link" href="http://localhost/05base_de_datos/tienda_ropa/public/compras/mis_compras.php">Mis compras</a>  
         <a class="nav-link" href="http://localhost/05base_de_datos/tienda_ropa/public/compras/nueva_compra.php">Nueva compra</a>  
         <a class="nav-link" href="http://localhost/05base_de_datos/tienda_ropa/public/desconectarse.php">Desconectarse</a>  
+        <a class="nav-link" > <?php echo "<p> Has iniciado sesión ". $_SESSION["usuario"]."</p>"; ?></a>  
       </div>
     </div>
   </div>
