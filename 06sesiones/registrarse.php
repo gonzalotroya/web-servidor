@@ -17,11 +17,14 @@
             $usuario=$_POST["usuario"];
             $contrasena=$_POST["contrasena"];
             $nombre=$_POST["nombre"];
+            $rol=$_POST["rol"];
 
             $hash_contrasena= password_hash($contrasena,PASSWORD_DEFAULT);
+            
+            
          
-            $sql="INSERT INTO usuarios(usuario,contrasena,nombre)
-             VALUES ('$usuario','$hash_contrasena','$nombre')";
+            $sql="INSERT INTO usuarios(usuario,contrasena,nombre,rol)
+             VALUES ('$usuario','$hash_contrasena','$nombre','$rol')";
 
             if($conexion -> query($sql)==TRUE){
                 ?><div class="alert alert-success" role="alert"><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><?php echo "<p>Registro exitosa</p>";?></button></div><?php 
@@ -46,6 +49,14 @@
                     <div class="form-group mb-3">
                         <label class="form-label">Nombre</label>
                         <input class="form-control" name="nombre" type="text">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">Rol</label>
+                        <select class="form-select" name="rol">
+                        <option selected disabled hidden>Abir</option>
+                        <option value="administrador">administrador</option>
+                        <option value="usuario">usuario</option>
+                        </select>
                     </div>
                     <div class="form-group mb-3">
                         <button class="btn btn-primary" type="submit">Registrarse</button>

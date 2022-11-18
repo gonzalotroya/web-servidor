@@ -22,6 +22,19 @@
                 echo "<p> Has iniciado sesión ". $_SESSION["usuario"]."</p>"; 
                 }
                 ?>
+                <?php
+                if(($_SESSION["rol"])=='administrador'){
+                    ?>
+                    <p>Esto no lo ven todos</p>
+                    <p>esto todos</p>
+                <?php 
+                }else{
+                ?><p>esto todos</p><?php
+                }
+                ?>
+                
+
+                
             </div>
         </div>
         <a href="desconectarse.php">Cerrar sesión</a>
