@@ -12,8 +12,8 @@
 <body>
     <div class="container">
         <?php 
-                        session_start();
-                        require '../../utils/database.php'; ?>
+            session_start();
+            require '../../utils/database.php'; ?>
         <?php require '../header.php' ?>
         <?php
                 if(!isset($_SESSION["usuario"])){
@@ -32,6 +32,7 @@
         
             $usuario=$_SESSION["usuario"];
             $sql="SELECT * FROM clientes WHERE usuario='$usuario'";
+            $resultado = $conexion -> query($sql);
             if($resultado -> num_rows > 0){
                 while ($fila = $resultado -> fetch_assoc()){
                 $cliente_id=$fila["id"];

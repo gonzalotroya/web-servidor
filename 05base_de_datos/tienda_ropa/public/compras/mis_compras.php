@@ -20,8 +20,11 @@
                 }else{
                 echo "<p> Has iniciado sesión ". $_SESSION["usuario"]."</p>"; 
                 }
+                if($_SERVER["REQUEST_METHOD"]=="GET"){
+                    $usuario=$_SESSION["usuario"];
+                }
                 ?>
-        <h1>Listado de prendas</h1>
+        <h1>Mis compras</h1>
         <div class="row">
             <div class="col-9">
             <?php if($_SESSION["rol"]=='administrador'){?>
@@ -36,6 +39,7 @@
                         <th>Talla</th>
                         <th>Precio</th>
                         <th>Categoria</th>
+                        <th>Cantidad</th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -45,6 +49,7 @@
                     require '../../utils/database.php';
                     if($_SERVER["REQUEST_METHOD"]=="POST"){
                         $id=$_POST["id"];
+                        
                         $sql="SELECT imagen FROM prendas WHERE id='$id'";
                         $resultado=$conexion ->query($sql);
                         if($resultado -> num_rows >0){
@@ -62,28 +67,33 @@
                             ?><div class="alert alert-danger" role="alert"><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><?php echo "<p>Error al borrar</p>";?></button></div><?php 
                         }
                     }
-                    $sql ="SELECT *FROM vw_misprendas;";
+                    $usuario=$_SESSION["usuario"];
+                    $sql ="SELECT *FROM vw_misprendas WHERE usuario='$usuario'";
                     $resultado=$conexion ->query($sql);
                     
                     
                     if($resultado -> num_rows >0){
                         while ($fila = $resultado -> fetch_assoc()) {
-                            $nombre=$fila["nombre"];
+                            $producto=$fila["producto"];
                             $talla=$fila["talla"];
-                            $precio=$fila["precio"];
+                            $precio_unitario=$fila["precio_unitario"];
                             $categoria=$fila["categoria"];
                             $imagen=$fila["imagen"];
+                            $cantidad=$fila["cantidad"];
                             
                             ?>
                             <tr>
                                 <td><?php echo $_SESSION["usuario"] ?></td>
-                                <td><?php echo $nombre ?></td>
+                                <td><?php echo $producto ?></td>
                                 <td><img width="50" height="60" src="../../<?php echo $imagen ?>"></td>
                                 <td><?php echo $talla ?></td>
-                                <td><?php echo $precio ?></td>
+                                <td><?php echo $precio_unitario ?></td>
                                 <td><?php echo $categoria ?></td>
+                                <td><?php echo $cantidad ?></td>
+                                
                                 <td>
-                                    <form action="mostrar_prendas.php" method="get">
+                            
+                                    <form action="../prendas/mostrar_prendas.php" method="get">
                                         <button class="btn btn-primary" type="submit">Ver</button>
                                         <input type="hidden" name="id" value="<?php echo $fila["id"]?>">
                                     </form>
