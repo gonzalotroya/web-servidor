@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\companias;
 
 use Illuminate\Http\Request;
-use App\Models\consolas;
 
-class ConsolasController extends Controller
+class CompaniasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,11 +15,13 @@ class ConsolasController extends Controller
     public function index()
     {
         $mensaje="Esta es la lista de consolas";
-        $consola=consolas::all();
+        
+        $companias=Companias::all();
+        $mensaje="Aqui tenemos un listado";
 
-        return view('consolas/index', [
-        'mensaje'=> $mensaje,
-        'consolas'=>$consola
+        return view('companias/index', [
+        'companias'=>$companias,
+        "mensaje"=>$mensaje
         ]);
     }
 
@@ -30,8 +32,7 @@ class ConsolasController extends Controller
      */
     public function create()
     {
-        return view('consolas/create');
-
+        return view('companias/create');
     }
 
     /**
@@ -42,14 +43,13 @@ class ConsolasController extends Controller
      */
     public function store(Request $request)
     {
-        $consolas =new consolas;
-        $consolas -> nombre=$request ->input('nombre');
-        $consolas -> salida=$request ->input('salida');
-        $consolas -> generacion=$request ->input('generacion');
-        $consolas -> descripcion=$request ->input('descripcion');
-        $consolas -> save();
+        $companias =new companias;
+        $companias -> nombre=$request ->input('nombre');
+        $companias -> sede=$request ->input('sede');
+        $companias -> fecha_fundacion=$request ->input('fecha_fundacion');
+        $companias -> save();
 
-        return redirect('consolas');
+        return redirect('companias');
     }
 
     /**
