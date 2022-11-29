@@ -25,6 +25,8 @@
               <th>Salida</th>
               <th>Generacion</th>
               <th>Descripcion</th>
+              <th></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -34,6 +36,18 @@
                     <td>{{ $consola -> salida }} </td>
                     <td>{{ $consola -> generacion }} </td>
                     <td>{{ $consola -> descripcion }} </td>
+                    <td>
+                      <form method="get" action="{{ route('consolas.show',['consola'=>$consola->id]) }}">
+                        <button class="btn btn-primary" type="submit">Ver</button>
+                      </form>
+                    </td>
+                    <td>
+                      <form method="post" action="{{ route('consolas.destroy',['consola'=>$consola->id]) }}">
+                        @csrf
+                        {{ method_field('DELETE') }}
+                        <button class="btn btn-primary" type="submit">Borrar</button>
+                      </form>
+                    </td>
                 </tr>
             @endforeach
           </tbody>

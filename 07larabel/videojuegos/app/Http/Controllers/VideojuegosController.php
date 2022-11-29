@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Videojuego;
+use Illuminate\Support\Facades\DB;
+
 class VideojuegosController extends Controller
 {
     /**
@@ -65,7 +67,8 @@ class VideojuegosController extends Controller
      */
     public function show($id)
     {
-        //
+        $videojuego=Videojuego::find($id);
+        return view('videojuegos/show',['videojuego'=>$videojuego]);
     }
 
     /**
@@ -76,7 +79,9 @@ class VideojuegosController extends Controller
      */
     public function edit($id)
     {
-        //
+        $videojuego=Videojuego::find($id);
+
+        return view('videojuegos/edit',['videojuego'=>$videojuego]);
     }
 
     /**
@@ -88,7 +93,18 @@ class VideojuegosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $videojuego=Videojuego::find($id);
+
+        $videojuego -> titulo =$request -> input('titulo');
+        $videojuego -> precio =$request -> input('precio');
+        $videojuego -> pegi =$request -> input('pegi');
+        $videojuego -> descripcion =$request -> input('descripcion');
+
+        $videojuego -> save();
+
+        return redirect('videojuegos');
+
+
     }
 
     /**
@@ -99,6 +115,26 @@ class VideojuegosController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('videojuegos') -> where('id','=',$id) ->delete();
+        
+        return redirect('videojuegos');
     }
+
+    /**
+     * BUsca todos los juegos que contengan la palabra introducida
+     * @param string $titulo
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        $titulo=$request ->input('titulo');
+        $videojuegos = DB::table('videojuegos') ->where('titulo','like','%'. $titulo .'%')->get();
+
+        return view('videojuegos/search',
+        [
+            'videojuegos' => $videojuegos
+        ]
+        );
+    }
+
 }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\companias;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class CompaniasController extends Controller
@@ -60,7 +60,8 @@ class CompaniasController extends Controller
      */
     public function show($id)
     {
-        //
+        $companias=companias::find($id);
+        return view('companias/show',['companias'=>$companias]);
     }
 
     /**
@@ -71,7 +72,8 @@ class CompaniasController extends Controller
      */
     public function edit($id)
     {
-        //
+        $companias=companias::find($id);
+        return view('companias/edit',['companias'=>$companias]);
     }
 
     /**
@@ -83,7 +85,14 @@ class CompaniasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $companias=companias::find($id);
+        $companias -> nombre =$request -> input('nombre');
+        $companias -> sede =$request -> input('sede');
+        $companias -> fecha_fundacion =$request -> input('fecha_fundacion');
+
+        $companias -> save();
+
+        return redirect('companias');
     }
 
     /**
@@ -94,6 +103,8 @@ class CompaniasController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('companias') -> where('id','=',$id) ->delete();
+        
+        return redirect('companias');
     }
 }

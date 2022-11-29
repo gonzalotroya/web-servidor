@@ -16,7 +16,19 @@
     <a href="{{ route('videojuegos.create') }}" class="btn btn-success">Crear videojuego</a>
     <a href="{{ route('companias.index') }}" class="btn btn-success">Ver compañias</a>
     <a href="{{ route('consolas.index') }}" class="btn btn-success">Ver consolas</a>
-
+    <form action="{{ route('videojuegos.search') }}" method="get">
+        <div class="row">
+          <div class="col-3">
+            <label class="from-control">Buscar por titulo -></label>
+          </div>
+          <div class="col-3">
+            <input class="form-control" type="text" name="titulo">
+          </div>
+          <div class="col-3">
+            <button class="btn btn-secondary" type="submit">Buscar</button>
+          </div>
+        </div>
+    </form>
     <div class="row">
       <div class="col-9">
         <table class="table">
@@ -26,6 +38,8 @@
               <th>Precio</th>
               <th>PEGI</th>
               <th>Descripcion</th>
+              <th></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -35,6 +49,18 @@
                     <td>{{ $videojuego ->precio }} </td>
                     <td>{{ $videojuego -> pegi }} </td>
                     <td>{{ $videojuego -> descripcion }} </td>
+                    <td>
+                      <form method="get" action="{{ route('videojuegos.show',['videojuego'=>$videojuego->id]) }}">
+                        <button class="btn btn-primary" type="submit">Ver</button>
+                      </form>
+                    </td>
+                    <td>
+                      <form method="post" action="{{ route('videojuegos.destroy',['videojuego'=>$videojuego->id]) }}">
+                        @csrf
+                        {{ method_field('DELETE') }}
+                        <button class="btn btn-primary" type="submit">Borrar</button>
+                      </form>
+                    </td>
                 </tr>
             @endforeach
           </tbody>
