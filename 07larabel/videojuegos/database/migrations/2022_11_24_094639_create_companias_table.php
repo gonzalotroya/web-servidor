@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('nombre')->unique();
             $table->string('sede');
             $table->date('fecha_fundacion');
+            $table->unsignedBigInteger('videojuegos_id')->nullable();
+            $table->foreign('videojuegos_id')->references('id')->on('videojuegos');
             $table->timestamps();
         });
     }

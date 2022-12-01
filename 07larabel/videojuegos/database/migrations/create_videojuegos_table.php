@@ -19,6 +19,10 @@ return new class extends Migration
             $table->double('precio');
             $table->integer('pegi');
             $table->string('descripcion');
+            $table->unsignedBigInteger('consolas_id')->nullable();
+            $table->foreign('consolas_id')->references('id')->on('consolas');
+            $table->unsignedBigInteger('companias_id')->nullable();
+            $table->foreign('companias_id')->references('id')->on('companias');
             $table->timestamps();
         });
     }

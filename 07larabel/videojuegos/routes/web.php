@@ -31,6 +31,8 @@ Route::get('/consolas/info', function () {
 });
 
 Route::get('/videojuegos/search',[VideojuegosController::class,'search'])->name('videojuegos.search');
+Route::get('/consolas/search',[ConsolasController::class,'search'])->name('consolas.search');
+Route::get('/companias/search',[CompaniasController::class,'search'])->name('companias.search');
 
 Route::resource('/videojuegos',VideojuegosController::class);
 Route::resource('/companias',CompaniasController::class);

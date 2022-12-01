@@ -107,4 +107,16 @@ class CompaniasController extends Controller
         
         return redirect('companias');
     }
+
+    public function search(Request $request)
+    {
+        $nombre=$request ->input('nombre');
+        $companias = DB::table('companias') ->where('nombre','like','%'. $nombre .'%')->get();
+
+        return view('companias/search',
+        [
+            'companias' => $companias
+        ]
+        );
+    }
 }

@@ -110,4 +110,16 @@ class ConsolasController extends Controller
         
         return redirect('consolas');
     }
+
+    public function search(Request $request)
+    {
+        $nombre=$request ->input('nombre');
+        $consola = DB::table('consolas') ->where('nombre','like','%'. $nombre .'%')->get();
+
+        return view('consolas/search',
+        [
+            'consolas' => $consola
+        ]
+        );
+    }
 }

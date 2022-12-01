@@ -19,6 +19,7 @@ return new class extends Migration
             $table->date('salida');
             $table->integer('generacion');
             $table->string('descripcion');
+            
             $table->timestamps();
         });
     }
