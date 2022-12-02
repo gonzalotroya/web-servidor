@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categoria;
 use App\Models\Producto;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,9 @@ class ProductosController extends Controller
      */
     public function create()
     {
-        //
+        $categoria=Categoria::all();
+
+        return view('Productos/create',['categorias'=>$categoria]);
     }
 
     /**

@@ -15,14 +15,13 @@ return new class extends Migration
     {
         Schema::create('videojuegos', function (Blueprint $table) {
             $table->id();
-            $table->string('titulo')->unique();
-            $table->double('precio');
+            $table->string('titulo',60)->unique();
+            $table->double('precio',6,2);
             $table->integer('pegi');
-            $table->string('descripcion');
-            $table->unsignedBigInteger('consolas_id')->nullable();
-            $table->foreign('consolas_id')->references('id')->on('consolas');
-            $table->unsignedBigInteger('companias_id')->nullable();
+            $table->string('descripcion',200);
+            $table->unsignedBigInteger('companias_id');
             $table->foreign('companias_id')->references('id')->on('companias');
+
             $table->timestamps();
         });
     }

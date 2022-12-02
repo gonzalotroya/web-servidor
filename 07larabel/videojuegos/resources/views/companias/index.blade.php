@@ -42,7 +42,7 @@
           </thead>
           <tbody>
             @foreach ($companias as $compania)            
-                <tr>
+                <tr class="table table-dark">
                     <td>{{ $compania->nombre }} </td>
                     <td>{{ $compania ->sede }} </td>
                     <td>{{ $compania -> fecha_fundacion }} </td>
@@ -59,17 +59,20 @@
                       </form>
                     </td>
                 </tr>
+                @php
+                 $videojuegos=$compania->videojuego;
+                @endphp
+                @foreach($videojuegos as $videojuego)
+                  <tr class="table table-light">
+                    <td>{{ $videojuego ->titulo }} </td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                @endforeach    
+
             @endforeach
           </tbody>
         </table>
-        @foreach($companias as $compania)
-                    <ul>
-                      <li>
-                        {{$compania ->nombre}} - {{ $compania->videojuegos->titulo}}  
-                      </li>
-                    </ul>
-        @endforeach
-        
       </div>
     </div>  
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>      

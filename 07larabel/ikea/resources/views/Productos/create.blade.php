@@ -7,15 +7,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" 
     rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
-    <title>Nuevo Videojuegos</title>
+    <title>Nuevo Producto</title>
 </head>
 <body>
-    <h1>Nueva videojuego</h1>
+    <h1>Nuevo Producto</h1>
     <?php
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $titulo = depurar($_POST["titulo"]);
-            $precio=depurar($_POST["precio"]);
-            $PEGI=depurar($_POST["PEGI"]);
+            $nombre = depurar($_POST["nombre"]);
+            $fecha_lanzamiento=depurar($_POST["fecha_lanzamiento"]);
             $descripcion=depurar($_POST["descripcion"]);
         }
     
@@ -27,40 +26,27 @@
         }
     ?>
 
-    <form action="{{ route('videojuegos.store') }}" method="post">
+    <form action="{{ route('Productos.store') }}" method="post">
         @csrf
-        <label>Titulo</label>
-        <input type="text" name="titulo">
+        <label>Nombre</label>
+        <input type="text" name="nombre">
         <span class="error">
                 * <?php if(isset($err_nombre)) echo $err_nombre ?>
             </span>
         <br><br>
-        <label>Precio</label>
-        <input type="text" name="precio">
+        <label>Fecha lanzamiento</label>
+        <input type="date" name="fecha_lanzamiento">
         <span class="error">
-                * <?php if(isset($err_precio)) echo $err_precio ?>
+                * <?php if(isset($err_fecha)) echo $err_fecha ?>
             </span>
         <br><br>
-        <label>PEGI</label>
-        <select class="form-select" name="pegi">
-            <option selected hidden>3</option>
-            <option value="3">+3</option>
-            <option value="10">10+</option>
-            <option value="16">16+</option>
-            <option value="18">18+</option>
-        </select>
 
-        <label class="from-label">Compañia</label>
-        <select class="form-select" name="companias_id">
-            @foreach($companias as $compania)
-            <option value="{{ $compania ->id}}">{{$compania ->nombre }}</option>
+        <label class="from-label">Categoria</label>
+        <select class="form-select" name="categoria_id">
+            @foreach($categorias as $categoria)
+            <option value="{{ $categoria ->id}}">{{$categoria ->nombre }}</option>
             @endforeach
-            
         </select>
-        <span class="error">
-                * <?php if(isset($err_PEGI)) echo $err_PEGI ?>
-            </span>
-        <br><br>
         <div class="form-group mb-3">
             <label>Descripcion</label>
             <span class="error">
