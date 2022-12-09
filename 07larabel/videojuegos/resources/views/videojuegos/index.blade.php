@@ -39,6 +39,7 @@
               <th>PEGI</th>
               <th>Descripcion</th>
               <th>Compañia</th>
+              <th>Consolas</th>
               <th></th>
               <th></th>
             </tr>
@@ -51,6 +52,12 @@
                     <td>{{ $videojuego ->pegi }} </td>
                     <td>{{ $videojuego ->descripcion }} </td>
                     <td>{{ $videojuego ->companias->nombre }} </td>
+                    <td>
+                      @foreach($videojuego ->consolas as $consola)
+                      {{$consola->nombre}},
+                      @endforeach
+                    </td>
+
 
                     <td>
                       <form method="get" action="{{ route('videojuegos.show',['videojuego'=>$videojuego->id]) }}">

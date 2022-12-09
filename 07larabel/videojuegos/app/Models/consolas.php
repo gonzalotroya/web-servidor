@@ -8,8 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class consolas extends Model
 {
     use HasFactory;
-    public function videojuego()
+   
+    public function videojuegos()
     {
-        return $this -> hasMany(Videojuego::class);
+        return $this -> belongsToMany(Videojuego::class,'consolas_videojuegos','consola_id','videojuego_id');
     }
 }

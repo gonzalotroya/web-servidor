@@ -12,4 +12,8 @@ class Videojuego extends Model
     {
         return $this -> belongsTo(Companias::class);
     }
+    public function consolas()
+    {
+        return $this -> belongsToMany(consolas::class,'consolas_videojuegos','videojuego_id','consola_id');
+    }
 }

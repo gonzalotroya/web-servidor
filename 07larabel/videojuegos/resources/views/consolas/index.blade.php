@@ -61,6 +61,17 @@
                       </form>
                     </td>
                 </tr>
+              @php
+               $videojuegos=$consola->videojuegos;
+              @endphp
+              @foreach($videojuegos as $videojuego)
+                <tr class="table table-dark">
+                  <td>{{ $videojuego ->titulo }} </td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              @endforeach    
+
             @endforeach
           </tbody>
         </table>
